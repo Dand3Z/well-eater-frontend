@@ -1,0 +1,50 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+.list {
+    display: flex;
+    gap: 2rem;
+    padding: 3rem 4.8rem;
+    border-radius: 3rem;
+}
+
+.list a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.list a:hover,
+.list a.active {
+    color: #f0be39;
+    transition: all 0.3s;
+}
+
+.auth {
+    padding: 1rem;
+    background-color: #f0be39;
+    border-radius: 1rem;
+}
+
+.auth:hover {
+    background-color: #a9be77;
+    transition: all 1s;
+
+}
+
+.auth a,
+.auth form{
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+
