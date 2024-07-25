@@ -1,0 +1,19 @@
+.datePicker {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    justify-content: center;
+    margin: 20px;
+}
+
+.arrow {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.week-display {
+    margin: 0 15px;
+}
