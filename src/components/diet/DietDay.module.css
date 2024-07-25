@@ -1,0 +1,34 @@
+.monday{
+    grid-column: 11 / 31;
+}
+
+.tuesday{
+    grid-column: 41 / 61;
+}
+
+.wednesday{
+    grid-column: 71 / 91;
+}
+
+.thursday{
+    grid-column: 101 / 121;
+}
+
+.friday{
+    grid-column: 21 / 41;
+}
+
+.saturday{
+    grid-column: 56 / 76;
+}
+
+.sunday{
+    grid-column: 91 / 111;
+}
+
+.day{
+    padding: 8rem 5rem;
+    background-color: pink;
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}

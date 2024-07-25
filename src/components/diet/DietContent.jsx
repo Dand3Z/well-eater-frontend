@@ -1,6 +1,7 @@
 import DietNavMenu from "./DietNavMenu.jsx";
 import {formatDate} from '../../util/date.js';
 import {useState} from "react";
+import DietDays from "./DietDays.jsx";
 
 function calculateCurrentMonday() {
     const today = new Date();
@@ -14,7 +15,6 @@ function calculateDate(currentMonday, move) {
     const monday = new Date(currentMonday);
     const day = new Date(currentMonday);
     day.setDate(monday.getDate() + move);
-    console.log(day);
     return formatDate(day, 'YYYY-MM-DD');
 }
 
@@ -32,6 +32,7 @@ function DietContent() {
         if (motionDirection === "next") {
             setCurrentMonday(calculateDate(currentMonday, 7));
         }
+        console.log(currentMonday);
     }
 
 
@@ -40,8 +41,11 @@ function DietContent() {
         <DietNavMenu
             currentMonday={currentMonday}
             currentSunday={calculateCurrentSunday(currentMonday)}
-            onClick={handleCurrentWeekChange} />
+            onClick={handleCurrentWeekChange}
+        />
+        <DietDays />
       </>
+
   );
 }
 
