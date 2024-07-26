@@ -58,3 +58,8 @@
 .used {
     background-color: pink;
 }
+
+.unused:hover {
+    background-color: pink;
+    transition: all 0.3s;
+}
