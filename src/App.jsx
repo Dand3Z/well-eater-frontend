@@ -9,6 +9,7 @@ import AuthenticationPage, {
 import { action as logoutAction } from "./pages/Logout.jsx";
 import { checkAuthLoader, tokenLoader } from "./util/auth.js";
 import DietDays from "./components/diet/DietDays.jsx";
+import Meals from "./pages/Meals.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <DietDays />
+          },
+          {
+            path: "meals",
+            element: <Meals />,
           }
         ]
       },
