@@ -17,4 +17,3 @@ function DatePicker({ currentMonday, currentSunday, onClick }) {
 };
 
 export default DatePicker;
-//

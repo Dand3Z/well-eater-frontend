@@ -2,12 +2,13 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Root.jsx";
 import HomePage from "./pages/Home.jsx";
-import DietPage from "./pages/Diet.jsx";
+import DietPage, {loadDiet} from "./pages/Diet.jsx";
 import AuthenticationPage, {
   action as authAction,
 } from "./pages/Authentication.jsx";
 import { action as logoutAction } from "./pages/Logout.jsx";
 import { checkAuthLoader, tokenLoader } from "./util/auth.js";
+import DietDays from "./components/diet/DietDays.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,9 +28,15 @@ const router = createBrowserRouter([
         action: authAction,
       },
       {
-        path: "diet",
+        path: "diet/:date?",
         element: <DietPage />,
-        loader: checkAuthLoader,
+        loader: loadDiet,
+        children: [
+          {
+            index: true,
+            element: <DietDays />
+          }
+        ]
       },
       {
         // temp
