@@ -7,6 +7,15 @@ function DietDay({ day, data }) {
     return (
         <div className={`${classes[day]} ${classes.day}`}>
             <h2>{dayWeekMapper(day)}</h2>
+            {data !== undefined && (
+                <>
+                    <h3>Węglowodany: {data.stats.stats.carbs} g</h3>
+                    <h3>Tłuszcz: {data.stats.stats.fats} g</h3>
+                    <h3>Białko: {data.stats.stats.proteins} g</h3>
+                    <h3>Kcal: {data.stats.stats.kcal} kcal</h3>
+                </>
+            )
+            }
         </div>
     )
 }
