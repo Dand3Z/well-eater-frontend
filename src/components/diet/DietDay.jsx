@@ -5,17 +5,20 @@ import {dayWeekMapper} from '../../util/dayWeekNameMapper.js';
 function DietDay({ day, data }) {
     // if data === undefined -> not used day, init it
     return (
-        <div className={`${classes[day]} ${classes.day}`}>
-            <h2>{dayWeekMapper(day)}</h2>
-            {data !== undefined && (
-                <>
-                    <h3>Węglowodany: {data.stats.stats.carbs} g</h3>
-                    <h3>Tłuszcz: {data.stats.stats.fats} g</h3>
-                    <h3>Białko: {data.stats.stats.proteins} g</h3>
-                    <h3>Kcal: {data.stats.stats.kcal} kcal</h3>
-                </>
-            )
-            }
+        <div className={`${classes[day]} ${classes.day} ${data === undefined ? classes.unused : classes.used}`}>
+            <div className={classes.title}>
+                <h2>{dayWeekMapper(day)}</h2>
+            </div>
+            <div className={classes.macros}>
+                {data !== undefined && (
+                    <>
+                        <p>Węglowodany: {data.stats.stats.carbs} g</p>
+                        <p>Tłuszcz: {data.stats.stats.fats} g</p>
+                        <p>Białko: {data.stats.stats.proteins} g</p>
+                        <p>Kcal: {data.stats.stats.kcal} kcal</p>
+                    </>
+                )}
+            </div>
         </div>
     )
 }

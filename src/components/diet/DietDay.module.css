@@ -28,11 +28,33 @@
 
 .day{
     height: 21rem;
-    background-color: pink;
     border-radius: 5px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    /*justify-content: center;*/
+}
+
+.title{
+    padding: 1.4rem 0;
+}
+
+.macros{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+}
+
+.macros p {
+    font-size: 1rem;
+}
+
+.unused {
+    background-color: #ccc9c6;
+}
+
+.used {
+    background-color: pink;
 }
