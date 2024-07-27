@@ -16,3 +16,18 @@ export function dayWeekMapper(day) {
             return 'Niedziela';
     }
 }
+
+export function mealTypeMapper(meal) {
+    switch (meal) {
+        case 'breakfast':
+            return 'Śniadanie';
+        case 'lunch':
+            return 'Drugie śniadanie';
+        case 'dinner':
+            return 'Obiad';
+        case 'snack':
+            return "Przekąska";
+        case 'supper':
+            return 'Kolacja';
+    }
+}

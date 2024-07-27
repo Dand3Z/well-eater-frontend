@@ -1,23 +1,16 @@
-import Meal from "../components/diet/meals/Meal.jsx";
-import {checkAuthLoader} from "../util/auth.js";
+import {checkAuthLoader, getAuthToken} from "../util/auth.js";
+import {json, useLoaderData} from "react-router-dom";
+import DietDayDetails from "../components/diet/dietDay/DietDayDetails.jsx";
 
-function getMealData(data, mealType) {
-    return data.meals.find((m) => m.mealType === mealType);
+function DietDayPage() {
+    const loaderData = useLoaderData();
+    console.log(loaderData);
+    const data = loaderData.responseData;
+    return <DietDayDetails mondayDate={loaderData.date} data={data}/>;
+
 }
 
-function DietDayDetails({ day, data }) {
-    return (
-        <div>
-            <Meal meal="breakfast" day={day} data={getMealData(data, "BREAKFAST")}/>
-            <Meal meal="lunch" day={day} data={getMealData(data, "LUNCH")}/>
-            <Meal meal="dinner" day={day} data={getMealData(data, "DINNER")}/>
-            <Meal meal="snack" day={day} data={getMealData(data, "SNACK")}/>
-            <Meal meal="supper" day={day} data={getMealData(data, "SUPPER")}/>
-        </div>
-    )
-}
-
-export default DietDayDetails;
+export default DietDayPage;
 
 export async function loader({ params }) {
     // Check if this check is necessary :)
@@ -27,6 +20,27 @@ export async function loader({ params }) {
     }
     console.log(params);
 
-    //const
+    const dayId = params.dietDayId;
+    const token = getAuthToken();
+
+    const response = await fetch(`http://localhost:8080/api/diet-day/get/${dayId}`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+
+    if (!response.ok) {
+        throw json(
+            {message: "Error getting diet"},
+            {status: 500}
+        );
+    } else {
+        const responseData = await response.json();
+        return {
+            date: params.date,
+            responseData
+        };
+    }
 }
 

@@ -1,5 +1,6 @@
 import classes from "./MainNavigation.module.css";
 import {Form, NavLink} from "react-router-dom";
+import {calculateCurrentMonday} from "../util/date.js";
 
 function MainNavigation() {
     const token = localStorage.getItem("token");
@@ -17,7 +18,7 @@ function MainNavigation() {
                     </li>
                     {token && (
                     <li>
-                        <NavLink to="/diet"
+                        <NavLink to={`/diet/${calculateCurrentMonday()}`}
                                  className={({isActive}) => isActive ? classes.active : undefined}>
                             Moja Dieta
                         </NavLink>

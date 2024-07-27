@@ -1,0 +1,11 @@
+.dayContainer {
+    margin-top: 1.2rem;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    column-gap: 0.5rem;
+    row-gap: 3rem;
+}
+
+.dayHeader {
+
+}
