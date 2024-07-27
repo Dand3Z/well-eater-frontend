@@ -36,6 +36,13 @@
     /*justify-content: center;*/
 }
 
+.day a{
+    text-decoration: none;
+    background-color: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+
 .title{
     padding: 1.4rem 0;
 }
@@ -45,6 +52,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border: 2px dotted #000000;
+    border-radius: 5px;
+    width: 14rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .macros p {

@@ -10,19 +10,15 @@ function DietDayGeneral({ day, data }) {
             <div className={classes.title}>
                 <h2>{dayWeekMapper(day)}</h2>
             </div>
-            <div className={classes.macros}>
-                {data !== undefined && (
-                    <>
+            {data !== undefined && (
+                <Link to={`day/${data.dietDayId}`}>
+                    <div className={classes.macros}>
                         <p>Węglowodany: {data.stats.stats.carbs} g</p>
-                        <p>Tłuszcz: {data.stats.stats.fats} g</p>
+                        <p>Tłuszcz: {data.stats.fats} g</p>
                         <p>Białko: {data.stats.stats.proteins} g</p>
                         <p>Kcal: {data.stats.stats.kcal} kcal</p>
-                        <Link to={`day/${data.dietDayId}`}>
-                            <div>EDIT</div>
-                        </Link>
-                    </>
-                )}
-            </div>
+                    </div>
+                </Link>)}
         </div>
     )
 }

@@ -14,8 +14,14 @@ function DietDayDetails( {...props } ) {
         <>
             <div className={classes.dayHeader}>
                 <Link to={`/diet/${mondayDate}`}>
-                    <div>Dupa</div>
+                    <div>Wróc</div>
                 </Link>
+                <div className={classes.totalStats}>
+                    <p>Węglowodany: {data.stats.stats.carbs} g</p>
+                    <p>Tłuszcz: {data.stats.stats.fats} g</p>
+                    <p>Białko: {data.stats.stats.proteins} g</p>
+                    <p>Kcal: {data.stats.stats.kcal} kcal</p>
+                </div>
             </div>
             <div className={classes.dayContainer}>
                 <MealGeneral meal="breakfast" monday={mondayDate} data={getMealData(data, "BREAKFAST")}/>

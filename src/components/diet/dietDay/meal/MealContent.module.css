@@ -1,0 +1,17 @@
+.mealHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mealHeader a {
+    margin: auto 0;
+}
+
+.totalStats{
+    display: flex;
+    gap: 0.6rem;
+}
+
+.totalStats p {
+    display: block;
+}

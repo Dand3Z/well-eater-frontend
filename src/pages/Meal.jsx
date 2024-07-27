@@ -1,21 +1,15 @@
+import MealContent from "../components/diet/dietDay/meal/MealContent.jsx";
 import {checkAuthLoader, getAuthToken} from "../util/auth.js";
-import {json, Outlet, useLoaderData, useMatch} from "react-router-dom";
-import DietDayDetails from "../components/diet/dietDay/DietDayDetails.jsx";
+import {json, useLoaderData} from "react-router-dom";
 
-function DietDayPage() {
+function MealPage() {
     const loaderData = useLoaderData();
-    const match = useMatch('diet/:date?/day/:dietDayId');
+    console.log(loaderData);
     const data = loaderData.responseData;
-    return (
-        <>
-            {match && <DietDayDetails mondayDate={loaderData.date} data={data}/>}
-            <Outlet />
-        </>
-    );
-
+    return <MealContent responseData={data} mondayDate={loaderData.date} dietDayId={loaderData.dietDayId}/>
 }
 
-export default DietDayPage;
+export default MealPage;
 
 export async function loader({ params }) {
     // Check if this check is necessary :)
@@ -25,10 +19,10 @@ export async function loader({ params }) {
     }
     console.log(params);
 
-    const dayId = params.dietDayId;
+    const mealId = params.mealId;
     const token = getAuthToken();
 
-    const response = await fetch(`http://localhost:8080/api/diet-day/get/${dayId}`, {
+    const response = await fetch(`http://localhost:8080/api/meal/get/${mealId}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`,
@@ -37,15 +31,15 @@ export async function loader({ params }) {
 
     if (!response.ok) {
         throw json(
-            {message: "Error getting diet"},
+            {message: "Error getting meal"},
             {status: 500}
         );
     } else {
         const responseData = await response.json();
         return {
             date: params.date,
+            dietDayId: params.dietDayId,
             responseData
         };
     }
 }
-
