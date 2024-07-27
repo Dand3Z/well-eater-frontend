@@ -17,7 +17,7 @@ function MainNavigation() {
                     </li>
                     {token && (
                     <li>
-                        <NavLink to="/draft"
+                        <NavLink to="/diet"
                                  className={({isActive}) => isActive ? classes.active : undefined}>
                             Moja Dieta
                         </NavLink>
