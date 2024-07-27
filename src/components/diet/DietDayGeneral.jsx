@@ -1,8 +1,8 @@
-import classes from './DietDay.module.css';
+import classes from './DietDayGeneral.module.css';
 import {dayWeekMapper} from '../../util/dayWeekNameMapper.js';
 
 // date, dietDayId, meals[], stats: date, stats: carbs, fats, kcal, proteins
-function DietDay({ day, data }) {
+function DietDayGeneral({ day, data }) {
     // if data === undefined -> not used day, init it
     return (
         <div className={`${classes[day]} ${classes.day} ${data === undefined ? classes.unused : classes.used}`}>
@@ -23,4 +23,4 @@ function DietDay({ day, data }) {
     )
 }
 
-export default DietDay;
+export default DietDayGeneral;

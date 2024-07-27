@@ -1,10 +1,11 @@
 import Meal from "../components/diet/meals/Meal.jsx";
+import {checkAuthLoader} from "../util/auth.js";
 
 function getMealData(data, mealType) {
     return data.meals.find((m) => m.mealType === mealType);
 }
 
-function MealsPage({ day, data }) {
+function DietDayDetails({ day, data }) {
     return (
         <div>
             <Meal meal="breakfast" day={day} data={getMealData(data, "BREAKFAST")}/>
@@ -16,4 +17,16 @@ function MealsPage({ day, data }) {
     )
 }
 
-export default MealsPage;
+export default DietDayDetails;
+
+export async function loader({ params }) {
+    // Check if this check is necessary :)
+    const authResult = checkAuthLoader();
+    if (authResult instanceof Response) {
+        return authResult;
+    }
+    console.log(params);
+
+    //const
+}
+

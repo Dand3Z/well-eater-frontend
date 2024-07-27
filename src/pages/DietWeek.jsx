@@ -6,7 +6,7 @@ import DietNavMenu from "../components/diet/DietNavMenu.jsx";
 
 
 
-function DietPage() {
+function DietWeekPage() {
   const data = useLoaderData();
   const [currentMonday, setCurrentMonday] = useState(data.currentMonday);
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ function DietPage() {
   );
 }
 
-export default DietPage;
+export default DietWeekPage;
 
 export async function loadDiet({ params }) {
   const authResult = checkAuthLoader();
