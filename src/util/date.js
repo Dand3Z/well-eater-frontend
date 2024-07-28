@@ -12,7 +12,7 @@ export function formatDate(date, format='DD.MM.YYYY')  {
 
 export function calculateCurrentMonday(date = new Date()) {
     const today = new Date(date);
-    const dayOfWeek = today.getDay();
+    const dayOfWeek = today.getDay() ? today.getDay() : 7;
     const lastMonday = new Date(today);
     lastMonday.setDate(today.getDate() - dayOfWeek + 1);
     return formatDate(lastMonday, 'YYYY-MM-DD');
