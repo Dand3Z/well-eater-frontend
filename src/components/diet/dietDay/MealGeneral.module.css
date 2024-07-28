@@ -37,11 +37,11 @@
     height: 100%;
 }
 
-.dishType{
+.dishType {
     padding: 1.4rem 0.4rem 0rem 0.4rem;
 }
 
-.macros{
+.macros {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     place-items: center;

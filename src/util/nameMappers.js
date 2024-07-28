@@ -18,7 +18,7 @@ export function dayWeekMapper(day) {
 }
 
 export function mealTypeMapper(meal) {
-    switch (meal) {
+    switch (meal.toLowerCase()) {
         case 'breakfast':
             return 'Śniadanie';
         case 'lunch':
