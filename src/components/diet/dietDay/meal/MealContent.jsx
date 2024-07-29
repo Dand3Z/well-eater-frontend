@@ -1,11 +1,34 @@
 import classes from './MealContent.module.css';
 import {Link} from "react-router-dom";
 import {mealTypeMapper} from "../../../../util/nameMappers.js";
+import {useState} from "react";
+import EditFoodForm, {editFoodAction} from './EditFoodForm.jsx';
 
 function MealContent( {...props } ) {
+    const [mealData, setMealData] = useState(props.responseData);
+    const [showEditForm, setShowEditForm] = useState(false);
+    const [currentFood, setCurrentFood] = useState(null);
+
     const mondayDate = props.mondayDate;
     const dietDayId = props.dietDayId;
-    const data = props.responseData;
+    const data = mealData;
+    console.log(data.foods);
+
+    function handleEditClick(food) {
+        setCurrentFood(food);
+        setShowEditForm(true);
+    }
+
+    async function handleEditSubmit(mealFoodId, newAmount) {
+        try {
+            const newMealData = await editFoodAction(mealFoodId, newAmount);
+            sortFoodsInMeal(newMealData);
+            setMealData(newMealData);
+            setShowEditForm(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <>
@@ -26,7 +49,7 @@ function MealContent( {...props } ) {
                 </div>
                 <ul className={classes.foods}>
                     {data.foods.map((food) => (
-                        <li key={food.foodId} className={classes.food}>
+                        <li key={food.mealFoodId} className={classes.food}>
                             <div className={classes.foodContainer}>
                                 <div className={classes.foodDetails}>
                                     <div className={classes.foodName}>
@@ -34,16 +57,16 @@ function MealContent( {...props } ) {
                                         <p>amount: {food.amount} {food.unit}</p>
                                     </div>
                                     <div className={classes.macros}>
-                                        <p>carbs: {food.macros.carbs}</p>
-                                        <p>fats: {food.macros.fats}</p>
-                                        <p>proteins: {food.macros.proteins}</p>
-                                        <p>kcal: {food.macros.kcal}</p>
+                                        <p>carbs: {calculateMacro(food.macros.carbs, food.amount)}</p>
+                                        <p>fats: {calculateMacro(food.macros.fats, food.amount)}</p>
+                                        <p>proteins: {calculateMacro(food.macros.proteins, food.amount)}</p>
+                                        <p>kcal: {calculateMacro(food.macros.kcal, food.amount)}</p>
                                     </div>
                                 </div>
                                 <p className={classes.icon}>icon: {food.category}</p>
                             </div>
                             <div className={classes.foodActions}>
-                                <button>
+                                <button onClick={() => handleEditClick(food)}>
                                     Edytuj
                                 </button>
                                 <button>
@@ -57,8 +80,24 @@ function MealContent( {...props } ) {
                     </li>
                 </ul>
             </div>
+            {showEditForm && (
+                <EditFoodForm
+                    food={currentFood}
+                    onSubmit={handleEditSubmit}
+                    onCancel={() => setShowEditForm(false)}
+                />
+            )}
         </>
     )
 }
 
 export default MealContent;
+
+function sortFoodsInMeal(mealData) {
+    mealData.foods.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function calculateMacro(macroValue, amount) {
+    const value = macroValue * amount / 100.00;
+    return Math.round(value * 100) / 100.0;
+}

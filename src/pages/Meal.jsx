@@ -36,6 +36,7 @@ export async function loader({ params }) {
         );
     } else {
         const responseData = await response.json();
+        responseData.foods.sort((a, b) => a.name.localeCompare(b.name));
         return {
             date: params.date,
             dietDayId: params.dietDayId,
