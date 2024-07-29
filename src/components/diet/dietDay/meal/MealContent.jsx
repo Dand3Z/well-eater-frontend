@@ -17,7 +17,6 @@ function MealContent( {...props } ) {
     const mondayDate = props.mondayDate;
     const dietDayId = props.dietDayId;
     const data = mealData;
-    console.log(data.foods);
 
     function handleEditClick(food) {
         setCurrentFood(food);

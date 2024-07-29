@@ -32,8 +32,9 @@ export function mealTypeMapper(meal) {
     }
 }
 
-export function unitMapper(day) {
-    switch (day.toLowerCase()) {
+export function unitMapper(unit = 'g') {
+    unit = unit === null ? 'g' : unit;
+    switch (unit.toLowerCase()) {
         case 'g':
             return 'gramach';
         case 'ml':
