@@ -21,26 +21,6 @@ function EditFoodForm({ food, onSubmit, onCancel }) {
                     <label>Ilość w {unitMapper(food.unit)}</label>
                     <input value={amount} onChange={(e) => setAmount(e.target.value)} required/>
                 </div>
-                {/*<div className={classes.formGroup}>*/}
-                {/*    <label>Unit</label>*/}
-                {/*    <input value={food.unit} disabled/>*/}
-                {/*</div>*/}
-                {/*<div className={classes.formGroup}>*/}
-                {/*    <label>Carbs</label>*/}
-                {/*    <input value={calculateMacro(food.macros.carbs, amount)} disabled/>*/}
-                {/*</div>*/}
-                {/*<div className={classes.formGroup}>*/}
-                {/*    <label>Fats</label>*/}
-                {/*    <input value={calculateMacro(food.macros.fats, amount)} disabled/>*/}
-                {/*</div>*/}
-                {/*<div className={classes.formGroup}>*/}
-                {/*    <label>Proteins</label>*/}
-                {/*    <input value={calculateMacro(food.macros.proteins, amount)} disabled/>*/}
-                {/*</div>*/}
-                {/*<div className={classes.formGroup}>*/}
-                {/*    <label>Kcal</label>*/}
-                {/*    <input value={calculateMacro(food.macros.kcal, amount)} disabled/>*/}
-                {/*</div>*/}
                 <div className={classes.stats}>
                     <p className={classes.formLabel}>Wartości dla zadanej ilości</p>
                     <div className={classes.statsValues}>

@@ -4,10 +4,12 @@ import {mealTypeMapper} from "../../../../util/nameMappers.js";
 import {useState} from "react";
 import EditFoodForm, {editFoodAction} from './EditFoodForm.jsx';
 import {calculateMacro} from "../../../../util/food.js";
+import DeleteFoodForm, {deleteFoodAction} from "./DeleteFoodForm.jsx";
 
 function MealContent( {...props } ) {
     const [mealData, setMealData] = useState(props.responseData);
     const [showEditForm, setShowEditForm] = useState(false);
+    const [showDeleteForm, setShowDeleteForm] = useState(false);
     const [currentFood, setCurrentFood] = useState(null);
 
     const mondayDate = props.mondayDate;
@@ -26,6 +28,22 @@ function MealContent( {...props } ) {
             sortFoodsInMeal(newMealData);
             setMealData(newMealData);
             setShowEditForm(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function handleDeleteClick(food) {
+        setCurrentFood(food);
+        setShowDeleteForm(true);
+    }
+
+    async function handleDeleteSubmit(mealFoodId) {
+        try {
+            const newMealData = await deleteFoodAction(mealFoodId);
+            sortFoodsInMeal(newMealData);
+            setMealData(newMealData);
+            setShowDeleteForm(false);
         } catch (error) {
             console.error(error);
         }
@@ -70,7 +88,7 @@ function MealContent( {...props } ) {
                                 <button onClick={() => handleEditClick(food)}>
                                     Edytuj
                                 </button>
-                                <button>
+                                <button onClick={() => handleDeleteClick(food)}>
                                     Usuń
                                 </button>
                             </div>
@@ -87,6 +105,15 @@ function MealContent( {...props } ) {
                         food={currentFood}
                         onSubmit={handleEditSubmit}
                         onCancel={() => setShowEditForm(false)}
+                    />
+                </div>
+            )}
+            {showDeleteForm && (
+                <div className={classes.modalBackdrop}>
+                    <DeleteFoodForm
+                        food={currentFood}
+                        onSubmit={handleDeleteSubmit}
+                        onCancel={() => setShowDeleteForm(false)}
                     />
                 </div>
             )}
