@@ -13,6 +13,7 @@ import { loader as mealLoader} from "./pages/Meal.jsx";
 import DietDays from "./components/diet/DietDays.jsx";
 import DietDayPage from "./pages/DietDay.jsx";
 import MealPage from "./pages/Meal.jsx";
+import {initDietDayAction} from "./components/diet/DietDayGeneral.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
         path: "diet/:date?",
         element: <DietWeekPage />,
         loader: loadDiet,
+        action: initDietDayAction,
         children: [
           {
             index: true,

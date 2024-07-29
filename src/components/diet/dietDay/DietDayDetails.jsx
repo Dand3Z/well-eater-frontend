@@ -14,7 +14,7 @@ function DietDayDetails( {...props } ) {
         <>
             <div className={classes.dayHeader}>
                 <Link to={`/diet/${mondayDate}`}>
-                    <div>Wróc</div>
+                    <div>Wróć</div>
                 </Link>
                 <div className={classes.totalStats}>
                     <p>Węglowodany: {data.stats.stats.carbs} g</p>
