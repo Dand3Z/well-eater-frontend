@@ -31,3 +31,12 @@ export function mealTypeMapper(meal) {
             return 'Kolacja';
     }
 }
+
+export function unitMapper(day) {
+    switch (day.toLowerCase()) {
+        case 'g':
+            return 'gramach';
+        case 'ml':
+            return 'mililitrach';
+    }
+}

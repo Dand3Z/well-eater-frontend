@@ -2,13 +2,11 @@ import classes from './EditFoodForm.module.css';
 import {Form, json} from "react-router-dom";
 import {useState} from "react";
 import {getAuthToken} from "../../../../util/auth.js";
+import {calculateMacro} from "../../../../util/food.js";
+import {unitMapper} from "../../../../util/nameMappers.js";
 
 function EditFoodForm({ food, onSubmit, onCancel }) {
     const [amount, setAmount] = useState(food.amount);
-    const [carbs, setCarbs] = useState(food.macros.carbs);
-    const [fats, setFats] = useState(food.macros.fats);
-    const [proteins, setProteins] = useState(food.macros.proteins);
-    const [kcal, setKcal] = useState(food.macros.kcal);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,37 +15,76 @@ function EditFoodForm({ food, onSubmit, onCancel }) {
 
     return (
         <div className={classes.modal}>
+            <h4 className={classes.heading}>Edycja produktu: {food.name}</h4>
             <Form onSubmit={handleSubmit} className={classes.form}>
-                <div>
-                    <label>Name</label>
-                    <input value={food.name} disabled/>
-                </div>
-                <div>
-                    <label>Amount</label>
+                <div className={classes.formGroup}>
+                    <label>Ilość w {unitMapper(food.unit)}</label>
                     <input value={amount} onChange={(e) => setAmount(e.target.value)} required/>
                 </div>
-                <div>
-                    <label>Unit</label>
-                    <input value={food.unit} disabled/>
+                {/*<div className={classes.formGroup}>*/}
+                {/*    <label>Unit</label>*/}
+                {/*    <input value={food.unit} disabled/>*/}
+                {/*</div>*/}
+                {/*<div className={classes.formGroup}>*/}
+                {/*    <label>Carbs</label>*/}
+                {/*    <input value={calculateMacro(food.macros.carbs, amount)} disabled/>*/}
+                {/*</div>*/}
+                {/*<div className={classes.formGroup}>*/}
+                {/*    <label>Fats</label>*/}
+                {/*    <input value={calculateMacro(food.macros.fats, amount)} disabled/>*/}
+                {/*</div>*/}
+                {/*<div className={classes.formGroup}>*/}
+                {/*    <label>Proteins</label>*/}
+                {/*    <input value={calculateMacro(food.macros.proteins, amount)} disabled/>*/}
+                {/*</div>*/}
+                {/*<div className={classes.formGroup}>*/}
+                {/*    <label>Kcal</label>*/}
+                {/*    <input value={calculateMacro(food.macros.kcal, amount)} disabled/>*/}
+                {/*</div>*/}
+                <div className={classes.stats}>
+                    <p className={classes.formLabel}>Wartości dla zadanej ilości</p>
+                    <div className={classes.statsValues}>
+                        <div>
+                            <p>Węglowodany</p>
+                            <p>{calculateMacro(food.macros.carbs, amount)}</p>
+                        </div>
+                        <div>
+                            <p>Tłuszcze</p>
+                            <p>{calculateMacro(food.macros.fats, amount)}</p>
+                        </div>
+                        <div>
+                            <p>Białko</p>
+                            <p>{calculateMacro(food.macros.proteins, amount)}</p>
+                        </div>
+                        <div>
+                            <p>Kcal</p>
+                            <p>{calculateMacro(food.macros.kcal, amount)}</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label>Carbs</label>
-                    <input value={carbs} disabled/>
+                <div className={classes.stats}>
+                    <p className={classes.formLabel}>Wartości referencyjne dla 100 {food.unit.toLowerCase()}</p>
+                    <div className={classes.statsValues}>
+                        <div>
+                            <p>Węglowodany</p>
+                            <p>{food.macros.carbs}</p>
+                        </div>
+                        <div>
+                            <p>Tłuszcze</p>
+                            <p>{food.macros.fats}</p>
+                        </div>
+                        <div>
+                            <p>Białko</p>
+                            <p>{food.macros.proteins}</p>
+                        </div>
+                        <div>
+                            <p>Kcal</p>
+                            <p>{food.macros.kcal}</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label>Fats</label>
-                    <input value={fats} disabled/>
-                </div>
-                <div>
-                    <label>Proteins</label>
-                    <input value={proteins} disabled/>
-                </div>
-                <div>
-                    <label>Kcal</label>
-                    <input value={kcal} disabled/>
-                </div>
-                <button type={"submit"}>Submit</button>
-                <button type={"button"} onClick={onCancel}>Cancel</button>
+                <button className={classes.actionBtn} type={"submit"}>Zapisz</button>
+                <button className={classes.actionBtn} type={"button"} onClick={onCancel}>Anuluj</button>
             </Form>
         </div>
     )

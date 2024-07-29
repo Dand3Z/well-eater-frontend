@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {mealTypeMapper} from "../../../../util/nameMappers.js";
 import {useState} from "react";
 import EditFoodForm, {editFoodAction} from './EditFoodForm.jsx';
+import {calculateMacro} from "../../../../util/food.js";
 
 function MealContent( {...props } ) {
     const [mealData, setMealData] = useState(props.responseData);
@@ -81,11 +82,13 @@ function MealContent( {...props } ) {
                 </ul>
             </div>
             {showEditForm && (
-                <EditFoodForm
-                    food={currentFood}
-                    onSubmit={handleEditSubmit}
-                    onCancel={() => setShowEditForm(false)}
-                />
+                <div className={classes.modalBackdrop}>
+                    <EditFoodForm
+                        food={currentFood}
+                        onSubmit={handleEditSubmit}
+                        onCancel={() => setShowEditForm(false)}
+                    />
+                </div>
             )}
         </>
     )
@@ -95,9 +98,4 @@ export default MealContent;
 
 function sortFoodsInMeal(mealData) {
     mealData.foods.sort((a, b) => a.name.localeCompare(b.name));
-}
-
-function calculateMacro(macroValue, amount) {
-    const value = macroValue * amount / 100.00;
-    return Math.round(value * 100) / 100.0;
 }
