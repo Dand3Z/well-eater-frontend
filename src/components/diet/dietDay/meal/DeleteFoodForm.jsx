@@ -37,6 +37,6 @@ export async function deleteFoodAction(mealFoodId) {
             {message: "Error while deleting food from meal"},
         )
     } else {
-        return response.json();
+        return await response.json();
     }
 }

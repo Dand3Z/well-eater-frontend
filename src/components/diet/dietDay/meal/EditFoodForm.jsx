@@ -93,6 +93,6 @@ export async function editFoodAction(mealFoodId, newAmount) {
             {status: 500}
         );
     } else {
-        return response.json();
+        return await response.json();
     }
 }

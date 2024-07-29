@@ -5,12 +5,14 @@ import {useState} from "react";
 import EditFoodForm, {editFoodAction} from './EditFoodForm.jsx';
 import {calculateMacro} from "../../../../util/food.js";
 import DeleteFoodForm, {deleteFoodAction} from "./DeleteFoodForm.jsx";
+import AddFoodForm, {addFoodAction} from "./AddFoodForm.jsx";
 
 function MealContent( {...props } ) {
     const [mealData, setMealData] = useState(props.responseData);
+    const [currentFood, setCurrentFood] = useState(null);
     const [showEditForm, setShowEditForm] = useState(false);
     const [showDeleteForm, setShowDeleteForm] = useState(false);
-    const [currentFood, setCurrentFood] = useState(null);
+    const [showAddForm, setShowAddForm] = useState(false);
 
     const mondayDate = props.mondayDate;
     const dietDayId = props.dietDayId;
@@ -44,6 +46,21 @@ function MealContent( {...props } ) {
             sortFoodsInMeal(newMealData);
             setMealData(newMealData);
             setShowDeleteForm(false);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function handleAddClick() {
+        setShowAddForm(true);
+    }
+
+    async function handleAddSubmit(mealId, foodId, amount) {
+        try {
+            const newMealData = await addFoodAction(mealId, foodId, amount);
+            sortFoodsInMeal(newMealData);
+            setMealData(newMealData);
+            setShowAddForm(false);
         } catch (error) {
             console.error(error);
         }
@@ -95,7 +112,7 @@ function MealContent( {...props } ) {
                         </li>
                     ))}
                     <li className={classes.add}>
-                        <button>+</button>
+                        <button onClick={() => handleAddClick()}>+</button>
                     </li>
                 </ul>
             </div>
@@ -114,6 +131,15 @@ function MealContent( {...props } ) {
                         food={currentFood}
                         onSubmit={handleDeleteSubmit}
                         onCancel={() => setShowDeleteForm(false)}
+                    />
+                </div>
+            )}
+            {showAddForm && (
+                <div className={classes.modalBackdrop}>
+                    <AddFoodForm
+                        mealId={data.mealId}
+                        onSubmit={handleAddSubmit}
+                        onCancel={() => setShowAddForm(false)}
                     />
                 </div>
             )}
