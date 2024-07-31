@@ -1,0 +1,46 @@
+import {checkAuthLoader, getAuthToken} from "../util/auth.js";
+import {json, useLoaderData} from "react-router-dom";
+import MyProductsContent from "../components/products/MyProductsContent.jsx";
+import {useCallback} from "react";
+
+function MyProductsPage() {
+    const loaderData = useLoaderData();
+    const loadPageFunc = useCallback((page, size = 14) => {
+        return loadMyProducts(page, size);
+    });
+
+    console.log(loaderData);
+    return <MyProductsContent initData={loaderData} loadPageFunc={loadPageFunc}/>
+}
+
+export default MyProductsPage;
+
+export async function loader() {
+    // Check if this check is necessary :)
+    const authResult = checkAuthLoader();
+    if (authResult instanceof Response) {
+        return authResult;
+    }
+    return await loadMyProducts();
+}
+
+async function loadMyProducts(page = 0, size = 14) {
+    const token = getAuthToken();
+    const response = await fetch(`http://localhost:8080/api/food/search/created-by-me?page=${page}&size=${size}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+
+    if (!response.ok) {
+        throw json(
+            {message: "Error during searching foods"},
+            {status: 500}
+        );
+    } else {
+        const data = await response.json();
+        console.log(data);
+        return data;
+    }
+}
