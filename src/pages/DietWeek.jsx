@@ -1,20 +1,16 @@
 import {calculateCurrentMonday, calculateCurrentSunday, calculateDate} from "../util/date.js";
-import {useEffect, useState} from "react";
-import {json, Outlet, useLoaderData, useNavigate} from "react-router-dom";
+import {useState} from "react";
+import {json, Outlet, useLoaderData, useMatch, useNavigate} from "react-router-dom";
 import {checkAuthLoader, getAuthToken} from "../util/auth.js";
 import DietNavMenu from "../components/diet/DietNavMenu.jsx";
 
 
 
-function DietPage() {
+function DietWeekPage() {
   const data = useLoaderData();
   const [currentMonday, setCurrentMonday] = useState(data.currentMonday);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Log render count to debug
-    console.log("renders");
-  }, [currentMonday]);
+  const match = useMatch('diet/:date?');
 
   function handleCurrentWeekChange(motionDirection) {
     const newDate = calculateDate(currentMonday, motionDirection === "previous" ? -7 : 7);
@@ -26,15 +22,17 @@ function DietPage() {
 
   return (
       <>
-        <DietNavMenu currentMonday={currentMonday}
-                     currentSunday={calculateCurrentSunday(currentMonday)}
-                     onClick={handleCurrentWeekChange}/>
+        {match && (
+          <DietNavMenu currentMonday={currentMonday}
+                       currentSunday={calculateCurrentSunday(currentMonday)}
+                       onClick={handleCurrentWeekChange}/>
+        )}
         <Outlet context={{ currentMonday, currentSunday: calculateCurrentSunday(currentMonday), dietDays: data.days }}/>
       </>
   );
 }
 
-export default DietPage;
+export default DietWeekPage;
 
 export async function loadDiet({ params }) {
   const authResult = checkAuthLoader();

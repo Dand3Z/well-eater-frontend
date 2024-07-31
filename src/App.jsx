@@ -2,14 +2,18 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Root.jsx";
 import HomePage from "./pages/Home.jsx";
-import DietPage, {loadDiet} from "./pages/Diet.jsx";
+import DietWeekPage, {loadDiet} from "./pages/DietWeek.jsx";
 import AuthenticationPage, {
   action as authAction,
 } from "./pages/Authentication.jsx";
 import { action as logoutAction } from "./pages/Logout.jsx";
 import { checkAuthLoader, tokenLoader } from "./util/auth.js";
+import { loader as dietDayLoader } from "./pages/DietDay.jsx";
+import { loader as mealLoader} from "./pages/Meal.jsx";
 import DietDays from "./components/diet/DietDays.jsx";
-import Meals from "./pages/Meals.jsx";
+import DietDayPage from "./pages/DietDay.jsx";
+import MealPage from "./pages/Meal.jsx";
+import {initDietDayAction} from "./components/diet/DietDayGeneral.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,16 +34,28 @@ const router = createBrowserRouter([
       },
       {
         path: "diet/:date?",
-        element: <DietPage />,
+        element: <DietWeekPage />,
         loader: loadDiet,
+        action: initDietDayAction,
         children: [
           {
             index: true,
             element: <DietDays />
           },
           {
-            path: "meals",
-            element: <Meals />,
+            path: "day/:dietDayId",
+            element: <DietDayPage />,
+            loader: dietDayLoader,
+            children: [
+              {
+                index: true,
+              },
+              {
+                path: "meal/:mealId",
+                element: <MealPage />,
+                loader: mealLoader,
+              }
+            ]
           }
         ]
       },
