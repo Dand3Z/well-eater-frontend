@@ -65,6 +65,9 @@ function ProductsView() {
                     onChange={handleSearchChange}
                     placeholder="Wpisz co najmniej 3 znaki..."
                 />
+                {notFound && (
+                    <h6>Niestety nie znaleźliśmy szukanego przez Ciebie produktu. Może chciałbyś go sam dodać? Możesz to zrobić z poziomu sekcji Moje Produkty widocznej po zalogowaniu :)</h6>
+                )}
                 {searchResults.length > 0 && (
                     <>
                         <ul className={classes.searchResults}>
@@ -113,11 +116,6 @@ function ProductsView() {
                         </div>
                     </>
                 )}
-                {notFound && (
-                    <h6>Niestety nie znaleźliśmy szukanego przez Ciebie produktu. Może chciałbyś go sam dodać? Możesz to zrobić z poziomu sekcji Moje Produkty widocznej po zalogowaniu :)</h6>
-                )}
-                {/*<button className={classes.actionBtn} type={"submit"}>Zapisz</button>*/}
-                {/*<button className={classes.actionBtn} type={"button"} onClick={onCancel}>Anuluj</button>*/}
             </Form>
         </div>
     )
@@ -126,12 +124,8 @@ function ProductsView() {
 export default ProductsView;
 
 async function searchFoodBySubstring(substring, page, size = 10) {
-    const token = getAuthToken();
     const response = await fetch(`http://localhost:8080/api/food/search/by-text?text=${substring}&page=${page}&size=${size}`, {
         method: 'GET',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        }
     });
 
     if (!response.ok) {
