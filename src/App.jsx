@@ -10,10 +10,12 @@ import { action as logoutAction } from "./pages/Logout.jsx";
 import { checkAuthLoader, tokenLoader } from "./util/auth.js";
 import { loader as dietDayLoader } from "./pages/DietDay.jsx";
 import { loader as mealLoader} from "./pages/Meal.jsx";
+import { loader as myProductsLoader } from "./pages/MyProducts.jsx";
 import DietDays from "./components/diet/DietDays.jsx";
 import DietDayPage from "./pages/DietDay.jsx";
 import MealPage from "./pages/Meal.jsx";
 import {initDietDayAction} from "./components/diet/DietDayGeneral.jsx";
+import MyProductsPage from "./pages/MyProducts.jsx";
 
 const router = createBrowserRouter([
   {
@@ -60,9 +62,9 @@ const router = createBrowserRouter([
         ]
       },
       {
-        // temp
-        path: "products",
-        loader: checkAuthLoader,
+        path: "my-products",
+        element: <MyProductsPage />,
+        loader: myProductsLoader,
       },
       {
         path: "logout",
