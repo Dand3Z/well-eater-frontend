@@ -16,13 +16,19 @@ function MainNavigation() {
                             Strona Główna
                         </NavLink>
                     </li>
-                    {token && (
                     <li>
-                        <NavLink to={`/diet/${calculateCurrentMonday()}`}
+                        <NavLink to={"/products"}
                                  className={({isActive}) => isActive ? classes.active : undefined}>
-                            Moja Dieta
+                            Baza Produktów
                         </NavLink>
                     </li>
+                    {token && (
+                        <li>
+                            <NavLink to={`/diet/${calculateCurrentMonday()}`}
+                                     className={({isActive}) => isActive ? classes.active : undefined}>
+                                Moja Dieta
+                            </NavLink>
+                        </li>
                     )}
                     {token && (
                         <li>

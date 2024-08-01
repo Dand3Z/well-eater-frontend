@@ -1,6 +1,6 @@
 import {checkAuthLoader, getAuthToken} from "../util/auth.js";
 import {json, useLoaderData} from "react-router-dom";
-import MyProductsContent from "../components/products/MyProductsContent.jsx";
+import MyProductsContent from "../components/my_products/MyProductsContent.jsx";
 
 function MyProductsPage() {
     const loaderData = useLoaderData();

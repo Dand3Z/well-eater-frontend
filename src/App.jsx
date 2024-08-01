@@ -16,6 +16,7 @@ import DietDayPage from "./pages/DietDay.jsx";
 import MealPage from "./pages/Meal.jsx";
 import {initDietDayAction} from "./components/diet/DietDayGeneral.jsx";
 import MyProductsPage from "./pages/MyProducts.jsx";
+import ProductBase from "./pages/ProductBase.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
         path: "auth",
         element: <AuthenticationPage />,
         action: authAction,
+      },
+      {
+        path: "products",
+        element: <ProductBase />
       },
       {
         path: "diet/:date?",
