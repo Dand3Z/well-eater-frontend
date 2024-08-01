@@ -1,16 +1,12 @@
 import {checkAuthLoader, getAuthToken} from "../util/auth.js";
 import {json, useLoaderData} from "react-router-dom";
 import MyProductsContent from "../components/products/MyProductsContent.jsx";
-import {useCallback} from "react";
 
 function MyProductsPage() {
     const loaderData = useLoaderData();
-    const loadPageFunc = useCallback((page, size = 14) => {
-        return loadMyProducts(page, size);
-    });
 
     console.log(loaderData);
-    return <MyProductsContent initData={loaderData} loadPageFunc={loadPageFunc}/>
+    return <MyProductsContent initData={loaderData} loadPageFunc={loadMyProducts}/>
 }
 
 export default MyProductsPage;
