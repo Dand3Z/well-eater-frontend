@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import classes from './MyProductsContent.module.css';
 import {unitMapper} from "../../util/nameMappers.js";
+import ProductForm from "./ProductForm.jsx";
 
 function MyProductsContent({ initData, loadPageFunc }) {
     const [products, setProducts] = useState(initData.content);
@@ -8,6 +9,8 @@ function MyProductsContent({ initData, loadPageFunc }) {
     const [isFirstPage, setIsFirstPage] = useState(initData.first);
     const [isLastPage, setIsLastPage] = useState(initData.last);
     const [isInitialLoad, setIsInitialLoad] = useState(true);
+    const [showAddEditForm, setShowAddEditForm] = useState(false);
+    const [currentProduct, setCurrentProduct] = useState(null);
 
     useEffect(() => {
         if (isInitialLoad) {
@@ -27,6 +30,11 @@ function MyProductsContent({ initData, loadPageFunc }) {
                 console.error('Error fetching search results:', error);
             })
     }, [currentPage, loadPageFunc]);
+
+    function handleAddEditClick(product = null) {
+        setCurrentProduct(product);
+        setShowAddEditForm(true);
+    }
 
     return (
         <>
@@ -57,11 +65,20 @@ function MyProductsContent({ initData, loadPageFunc }) {
                                 </div>
                             </div>
                         </div>
+                        <div className={classes.actionButtons}>
+                            <button type={"button"} onClick={() => handleAddEditClick(product)}>
+                                Edytuj
+                            </button>
+                            <button type={"button"}>
+                                Usuń
+                            </button>
+                        </div>
                     </li>
                 ))}
-                <li className={`${classes.listItem} ${classes.addProduct}`}>
-                    +
-                </li>
+                <button type={"button"}
+                        onClick={() => handleAddEditClick()} className={`${classes.listItem} ${classes.addProduct}`}>
+                    <li>+</li>
+                </button>
             </ul>
             <div className={classes.navigationButtons}>
                 {!isFirstPage &&
@@ -73,6 +90,13 @@ function MyProductsContent({ initData, loadPageFunc }) {
                         &rarr;
                     </button>}
             </div>
+            {showAddEditForm && (
+                <div className={classes.modalBackdrop}>
+                    <ProductForm
+                        product={currentProduct}
+                        onCancel={() => setShowAddEditForm(false)} />
+                </div>
+            )}
         </>
     );
 }
