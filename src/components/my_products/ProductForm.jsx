@@ -25,7 +25,6 @@ function ProductForm({ product, onCancel }) {
         } catch (e) {
             console.error("Error occurred during saving new / editing product ", e);
         }
-
     }
 
     return (
@@ -88,7 +87,7 @@ function ProductForm({ product, onCancel }) {
                     <label>Kalorie</label>
                     <input value={kcal} onChange={(e) => setKcal(e.target.value)} required/>
                 </div>
-                <button className={classes.actionBtn} type={"submit"} onClick={handleSubmit}>Zapisz</button>
+                <button className={classes.actionBtn} type={"submit"} onClick={handleSubmit}>{product ? 'Zapisz' : 'Dodaj'}</button>
                 <button className={classes.actionBtn} type={"button"} onClick={onCancel}>Anuluj</button>
             </Form>
         </div>);
@@ -111,7 +110,7 @@ async function addEditFood(foodData, foodId = undefined) {
 
     if (!response.ok) {
         throw json(
-            {message: "Error during adding new food"},
+            {message: "Error during adding / editing food"},
             {status: 500}
         );
     } else {

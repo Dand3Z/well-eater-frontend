@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import classes from './MyProductsContent.module.css';
 import {unitMapper} from "../../util/nameMappers.js";
 import ProductForm from "./ProductForm.jsx";
+import DeleteProductForm from "./DeleteProductForm.jsx";
 
 function MyProductsContent({ initData, loadPageFunc }) {
     const [products, setProducts] = useState(initData.content);
@@ -10,6 +11,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
     const [isLastPage, setIsLastPage] = useState(initData.last);
     const [isInitialLoad, setIsInitialLoad] = useState(true);
     const [showAddEditForm, setShowAddEditForm] = useState(false);
+    const [showDeleteForm, setShowDeleteForm] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
 
     useEffect(() => {
@@ -34,6 +36,11 @@ function MyProductsContent({ initData, loadPageFunc }) {
     function handleAddEditClick(product = null) {
         setCurrentProduct(product);
         setShowAddEditForm(true);
+    }
+
+    function handleDeleteClick(product) {
+        setCurrentProduct(product);
+        setShowDeleteForm(true);
     }
 
     return (
@@ -69,7 +76,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
                             <button type={"button"} onClick={() => handleAddEditClick(product)}>
                                 Edytuj
                             </button>
-                            <button type={"button"}>
+                            <button type={"button"} onClick={() => handleDeleteClick(product)}>
                                 Usuń
                             </button>
                         </div>
@@ -95,6 +102,13 @@ function MyProductsContent({ initData, loadPageFunc }) {
                     <ProductForm
                         product={currentProduct}
                         onCancel={() => setShowAddEditForm(false)} />
+                </div>
+            )}
+            {showDeleteForm && (
+                <div className={classes.modalBackdrop}>
+                    <DeleteProductForm
+                        product={currentProduct}
+                        onCancel={() => setShowDeleteForm(false)} />
                 </div>
             )}
         </>
