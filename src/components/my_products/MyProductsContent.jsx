@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import classes from './MyProductsContent.module.css';
-import {unitMapper} from "../../util/nameMappers.js";
+import {unitMapperForDescription} from "../../util/nameMappers.js";
 import ProductForm from "./ProductForm.jsx";
 import DeleteProductForm from "./DeleteProductForm.jsx";
 
@@ -54,7 +54,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
                         </div>
                         <div className={classes.macros}>
                             <p className={classes.productDescription}>
-                                Wartości kaloryczne w 100 {unitMapper(product.unit)}
+                                Wartości kaloryczne w 100 {unitMapperForDescription(product.unit)}
                             </p>
                             <div className={classes.kcal}>{product.macros.kcal}</div>
                             <div className={classes.stats}>

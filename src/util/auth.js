@@ -38,3 +38,19 @@ export function checkAuthLoader() {
 
     return null;
 }
+
+export function getUserRoles() {
+    const roles = localStorage.getItem('roles');
+    if (!roles) {
+        return null;
+    }
+
+    console.log(roles);
+    console.log(typeof roles);
+    return JSON.parse(roles);
+}
+
+export function checkRole(role) {
+    const roles = getUserRoles();
+    return roles && roles.includes(role);
+}

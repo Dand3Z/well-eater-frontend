@@ -11,12 +11,14 @@ import { checkAuthLoader, tokenLoader } from "./util/auth.js";
 import { loader as dietDayLoader } from "./pages/DietDay.jsx";
 import { loader as mealLoader} from "./pages/Meal.jsx";
 import { loader as myProductsLoader } from "./pages/MyProducts.jsx";
+import { loader as adminPageLoader } from "./pages/Admin.jsx";
 import DietDays from "./components/diet/DietDays.jsx";
 import DietDayPage from "./pages/DietDay.jsx";
 import MealPage from "./pages/Meal.jsx";
 import {initDietDayAction} from "./components/diet/DietDayGeneral.jsx";
 import MyProductsPage from "./pages/MyProducts.jsx";
 import ProductBase from "./pages/ProductBase.jsx";
+import AdminPage from "./pages/Admin.jsx";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +72,11 @@ const router = createBrowserRouter([
         path: "my-products",
         element: <MyProductsPage />,
         loader: myProductsLoader,
+      },
+      {
+        path: "admin-panel",
+        element: <AdminPage />,
+        loader: adminPageLoader,
       },
       {
         path: "logout",
