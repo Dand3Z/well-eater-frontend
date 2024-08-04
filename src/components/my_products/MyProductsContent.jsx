@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import classes from './MyProductsContent.module.css';
-import {unitMapper} from "../../util/nameMappers.js";
+import {unitMapperForDescription} from "../../util/nameMappers.js";
 import ProductForm from "./ProductForm.jsx";
 import DeleteProductForm from "./DeleteProductForm.jsx";
 
@@ -45,6 +45,9 @@ function MyProductsContent({ initData, loadPageFunc }) {
 
     return (
         <>
+            <h3>Moje Produkty to sekcja w której możesz dodać produkty, których nie znalazłeś dotąd w naszej aktualnej bazie.
+                Wszystkie dodane przez Ciebie pozycje trafią do naszej ogólnej bazy i będą mogły zostać wykorzystane przez innych użytkowników.
+            </h3>
             <ul className={classes.productList}>
                 {products.map((product) => (
                     <li className={`${classes.listItem} ${classes.productItem}`} key={product.id}>
@@ -54,7 +57,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
                         </div>
                         <div className={classes.macros}>
                             <p className={classes.productDescription}>
-                                Wartości kaloryczne w 100 {unitMapper(product.unit)}
+                                Wartości kaloryczne w 100 {unitMapperForDescription(product.unit)}
                             </p>
                             <div className={classes.kcal}>{product.macros.kcal}</div>
                             <div className={classes.stats}>
@@ -101,6 +104,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
                 <div className={classes.modalBackdrop}>
                     <ProductForm
                         product={currentProduct}
+                        action={'ADD_EDIT'}
                         onCancel={() => setShowAddEditForm(false)} />
                 </div>
             )}

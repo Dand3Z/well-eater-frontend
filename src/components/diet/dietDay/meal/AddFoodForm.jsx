@@ -2,7 +2,7 @@ import classes from './AddFoodForm.module.css';
 import {Form, json} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getAuthToken} from "../../../../util/auth.js";
-import {unitMapper} from "../../../../util/nameMappers.js";
+import {unitMapperForDescription} from "../../../../util/nameMappers.js";
 import {calculateMacro} from "../../../../util/food.js";
 
 function AddFoodForm({ mealId, onSubmit, onCancel }) {
@@ -97,7 +97,7 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
                             type="number"
                             value={amount}
                             onChange={(e) => setAmount(e.target.value)}
-                            placeholder={`Ilość w ${unitMapper(selectedFood.unit)}`}
+                            placeholder={`Ilość w ${unitMapperForDescription(selectedFood.unit)}`}
                         />
                         <div className={classes.stats}>
                             <p className={classes.formLabel}>Wartości dla zadanej ilości</p>

@@ -3,7 +3,7 @@ import {Form, json} from "react-router-dom";
 import {useState} from "react";
 import {getAuthToken} from "../../../../util/auth.js";
 import {calculateMacro} from "../../../../util/food.js";
-import {unitMapper} from "../../../../util/nameMappers.js";
+import {unitMapperForDescription} from "../../../../util/nameMappers.js";
 
 function EditFoodForm({ food, onSubmit, onCancel }) {
     const [amount, setAmount] = useState(food.amount);
@@ -18,7 +18,7 @@ function EditFoodForm({ food, onSubmit, onCancel }) {
             <h4 className={classes.heading}>Edycja produktu: {food.name}</h4>
             <Form onSubmit={handleSubmit} className={classes.form}>
                 <div className={classes.formGroup}>
-                    <label>Ilość w {unitMapper(food.unit)}</label>
+                    <label>Ilość w {unitMapperForDescription(food.unit)}</label>
                     <input value={amount} onChange={(e) => setAmount(e.target.value)} required/>
                 </div>
                 <div className={classes.stats}>

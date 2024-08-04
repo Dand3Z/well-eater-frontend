@@ -32,7 +32,7 @@ export function mealTypeMapper(meal) {
     }
 }
 
-export function unitMapper(unit = 'g') {
+export function unitMapperForDescription(unit = 'g') {
     unit = unit === null ? 'g' : unit;
     switch (unit.toLowerCase()) {
         case 'g':
@@ -40,4 +40,43 @@ export function unitMapper(unit = 'g') {
         case 'ml':
             return 'mililitrach';
     }
+}
+
+export function categoryMapper(category) {
+    const categoryMap = {
+        'VEGETABLE': 'Warzywa',
+        'MEAT': 'Mięso',
+        'FRUIT': 'Owoce',
+        'CHEESE': 'Sery',
+        'BREAD': 'Pieczywo',
+        'SWEET': 'Słodycze',
+        'MILK': 'Produkty mleczne',
+        'EGG': 'Jajka',
+        'WATER': 'Woda',
+        'JUICE': 'Napój',
+        'ALCOHOL': 'Alkohole',
+        'JAR': 'Konserwy',
+        'SOUP': 'Zupy',
+        'DISH': 'Dania obiadowe',
+        'DESSERT': 'Desery',
+        'FAST_FOOD': 'Fast Foody',
+        'OTHER': 'Inne'
+    };
+    return categoryMap[category] || category;
+}
+
+export function typeMapper(type) {
+    const typeMap = {
+        'SIMPLE_PRODUCT': 'Produkt',
+        'COMPLEX_MEAL': 'Danie'
+    };
+    return typeMap[type] || type;
+}
+
+export function unitMapperForProductForm(unit) {
+    const unitMap = {
+        'G': 'Gramy (g)',
+        'ML': 'Mililitry (ml)'
+    };
+    return unitMap[unit] || unit;
 }

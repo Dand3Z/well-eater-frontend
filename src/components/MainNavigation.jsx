@@ -1,6 +1,7 @@
 import classes from "./MainNavigation.module.css";
 import {Form, NavLink} from "react-router-dom";
 import {calculateCurrentMonday} from "../util/date.js";
+import {checkRole} from "../util/auth.js";
 
 function MainNavigation() {
     const token = localStorage.getItem("token");
@@ -32,11 +33,19 @@ function MainNavigation() {
                     )}
                     {token && (
                         <li>
-                        <NavLink to="/my-products"
-                                 className={({isActive}) => isActive ? classes.active : undefined}>
-                            Moje Produkty
-                        </NavLink>
-                    </li>
+                            <NavLink to="/my-products"
+                                     className={({isActive}) => isActive ? classes.active : undefined}>
+                                Moje Produkty
+                            </NavLink>
+                        </li>
+                    )}
+                    {checkRole('ROLE_ADMIN') && (
+                        <li>
+                            <NavLink to="/admin-panel"
+                                     className={({isActive}) => isActive ? classes.active : undefined}>
+                                Panel Admina
+                            </NavLink>
+                        </li>
                     )}
                 </ul>
             </nav>

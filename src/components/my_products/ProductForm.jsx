@@ -2,8 +2,9 @@ import classes from './ProductForm.module.css';
 import {getAuthToken} from "../../util/auth.js";
 import {Form, json} from "react-router-dom";
 import {useState} from "react";
+import {categoryMapper, typeMapper, unitMapperForProductForm} from "../../util/nameMappers.js";
 
-function ProductForm({ product, onCancel }) {
+function ProductForm({ product, onCancel, action }) {
     const [name, setName] = useState(product ? product.name : '');
     const [category, setCategory] = useState(product ? product.category : 'VEGETABLE');
     const [type, setType] = useState(product ? product.type : 'SIMPLE_PRODUCT');
@@ -13,14 +14,28 @@ function ProductForm({ product, onCancel }) {
     const [proteins, setProteins] = useState(product ? product.macros.proteins : 0);
     const [kcal, setKcal] = useState(product ? product.macros.kcal : 0);
 
+    const actionMap = {
+        'KEEP': keepAndEditFood,
+        'ADD_EDIT': addEditFood
+    };
+
+    const categories = [
+        'VEGETABLE', 'MEAT', 'FRUIT', 'CHEESE', 'BREAD', 'SWEET', 'MILK', 'EGG', 'WATER', 'JUICE',
+        'ALCOHOL', 'JAR', 'SOUP', 'DISH', 'DESSERT', 'FAST_FOOD', 'OTHER'
+    ];
+
+    const types = ['SIMPLE_PRODUCT', 'COMPLEX_MEAL'];
+    const units = ['G', 'ML'];
+
     // TODO: change reload of page to sth that doesn't require refreshing
     const handleSubmit = async (e) => {
         e.preventDefault();
         const foodData = {
             name, category, type, unit, carbs, fats, proteins, kcal,
         };
+        const func = actionMap[action];
         try {
-            await addEditFood(foodData, product ? product.id : undefined);
+            await func(foodData, product ? product.id : undefined);
             window.location.reload();
         } catch (e) {
             console.error("Error occurred during saving new / editing product ", e);
@@ -38,37 +53,25 @@ function ProductForm({ product, onCancel }) {
                 <div className={classes.formGroup}>
                     <label>Kategoria</label>
                     <select value={category} onChange={(e) => setCategory(e.target.value)} required>
-                        <option value={'VEGETABLE'}>Warzywa</option>
-                        <option value={'MEAT'}>Mięso</option>
-                        <option value={'FRUIT'}>Owoce</option>
-                        <option value={'CHEESE'}>Sery</option>
-                        <option value={'BREAD'}>Pieczywo</option>
-                        <option value={'SWEET'}>Słodycze</option>
-                        <option value={'MILK'}>Produkty mleczne</option>
-                        <option value={'EGG'}>Jajka</option>
-                        <option value={'WATER'}>Woda</option>
-                        <option value={'JUICE'}>Napój</option>
-                        <option value={'ALCOHOL'}>Alkohole</option>
-                        <option value={'JAR'}>Konserwy</option>
-                        <option value={'SOUP'}>Zupy</option>
-                        <option value={'DISH'}>Dania obiadowe</option>
-                        <option value={'DESSERT'}>Desery</option>
-                        <option value={'FAST_FOOD'}>Fast Foody</option>
-                        <option value={'OTHER'}>Inne</option>
+                        {categories.map(category => (
+                            <option key={category} value={category}>{categoryMapper(category)}</option>
+                        ))}
                     </select>
                 </div>
                 <div className={classes.formGroup}>
                     <label>Typ</label>
                     <select value={type} onChange={(e) => setType(e.target.value)} required>
-                        <option value={'SIMPLE_PRODUCT'}>Produkt</option>
-                        <option value={'COMPLEX_MEAL'}>Danie</option>
+                        {types.map(type => (
+                            <option key={type} value={type}>{typeMapper(type)}</option>
+                        ))}
                     </select>
                 </div>
                 <div className={classes.formGroup}>
                     <label>Jednostka</label>
                     <select value={unit} onChange={(e) => setUnit(e.target.value)} required>
-                        <option value={'G'}>Gramy (g)</option>
-                        <option value={'ML'}>Mililitry (ml)</option>
+                        {units.map(unit => (
+                            <option key={unit} value={unit}>{unitMapperForProductForm(unit)}</option>
+                        ))}
                     </select>
                 </div>
                 <div className={classes.formGroup}>
@@ -115,5 +118,27 @@ async function addEditFood(foodData, foodId = undefined) {
         );
     } else {
         return await response.json();
+    }
+}
+
+async function keepAndEditFood(foodData, foodId) {
+    const token = getAuthToken();
+
+    const response = await fetch(`http://localhost:8080/admin/food/to-delete/unmark/${foodId}`, {
+        method: 'PATCH',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(foodData),
+    });
+
+    if (!response.ok) {
+        throw json(
+            {message: "Error during unmarking food"},
+            {status: 500}
+        );
+    } else {
+        return response.ok;
     }
 }
