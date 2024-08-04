@@ -1,31 +1,29 @@
-import classes from "./ProductsView.module.css"
+import classes from './FindAndEditForm.module.css'
 import {useEffect, useState} from "react";
-import {Form, json} from "react-router-dom";
-import {getAuthToken} from "../../util/auth.js";
+import {searchFoodBySubstring} from "../product_base/ProductsView.jsx";
+import {Form} from "react-router-dom";
+import ProductForm from "../my_products/ProductForm.jsx";
 
-// TODO: make a component -> almost the same as the one in AddFoodForm.jsx
-function ProductsView() {
+function FindAndEditForm() {
     const [searchText, setSearchText] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [selectedFood, setSelectedFood] = useState(null);
-    const [notFound, setNotFound] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [isFirstPage, setIsFirstPage] = useState(true);
     const [isLastPage, setIsLastPage] = useState(true);
+    const [showEditForm, setShowEditForm] = useState(false);
 
     useEffect(() => {
         if (searchText.length > 2) {
-            searchFoodBySubstring(searchText, currentPage, 10)
+            searchFoodBySubstring(searchText, currentPage, 4)
                 .then(results => {
                     console.log(results);
                     setSearchResults(results.content);
                     setIsFirstPage(results.first);
                     setIsLastPage(results.last);
-                    setNotFound(results.content.length === 0);
                 })
                 .catch(error => {
                     console.error('Error fetching search results:', error);
-                    setNotFound(true);
                 });
         } else {
             setSearchResults([]);
@@ -38,7 +36,6 @@ function ProductsView() {
         const value = e.target.value;
         const prevSearchText = searchText;
         setSearchText(value);
-        setNotFound(false);
         if (currentPage !== 0 || prevSearchText !== value) setCurrentPage(0);
         console.log('handleSearchChange invoked');
     };
@@ -47,6 +44,7 @@ function ProductsView() {
         setSelectedFood(food);
         setSearchText('');
         setSearchResults([]);
+        setShowEditForm(true)
         console.log('handleSelectFood invoked');
     };
 
@@ -56,8 +54,8 @@ function ProductsView() {
     }
 
     return (
-        <div className={classes.modal}>
-            <h4 className={classes.heading}>Sprawdź czy mamy szukany przez Ciebie produkt w naszej bazie</h4>
+        <div>
+            <h3 className={classes.heading}>Znajdź i edytuj produkt</h3>
             <Form className={classes.form}>
                 <input
                     type="text"
@@ -65,9 +63,6 @@ function ProductsView() {
                     onChange={handleSearchChange}
                     placeholder="Wpisz co najmniej 3 znaki..."
                 />
-                {notFound && (
-                    <h6>Niestety nie znaleźliśmy szukanego przez Ciebie produktu. Może chciałbyś go sam dodać? Możesz to zrobić z poziomu sekcji Moje Produkty widocznej po zalogowaniu :)</h6>
-                )}
                 {searchResults.length > 0 && (
                     <>
                         <ul className={classes.searchResults}>
@@ -88,54 +83,18 @@ function ProductsView() {
                         </div>
                     </>
                 )}
-                {selectedFood && (
-                    <>
-                        <div className={classes.selectedFood}>
-                            <p>Wybrano: {selectedFood.name}</p>
-                        </div>
-                        <div className={classes.stats}>
-                            <p className={classes.formLabel}>Wartości referencyjne dla 100 {selectedFood.unit.toLowerCase()}</p>
-                            <div className={classes.statsValues}>
-                                <div>
-                                    <p>Węglowodany</p>
-                                    <p>{selectedFood.macros.carbs}</p>
-                                </div>
-                                <div>
-                                    <p>Tłuszcze</p>
-                                    <p>{selectedFood.macros.fats}</p>
-                                </div>
-                                <div>
-                                    <p>Białko</p>
-                                    <p>{selectedFood.macros.proteins}</p>
-                                </div>
-                                <div>
-                                    <p>Kcal</p>
-                                    <p>{selectedFood.macros.kcal}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                )}
             </Form>
+            {showEditForm && (
+                <div className={classes.modalBackdrop}>
+                    <ProductForm
+                        product={selectedFood}
+                        action={'ADD_EDIT'}
+                        onCancel={() => setShowEditForm(false)} />
+                </div>
+            )}
         </div>
     )
 }
 
-export default ProductsView;
+export default FindAndEditForm;
 
-export async function searchFoodBySubstring(substring, page, size = 10) {
-    const response = await fetch(`http://localhost:8080/api/food/search/by-text?text=${substring}&page=${page}&size=${size}`, {
-        method: 'GET',
-    });
-
-    if (!response.ok) {
-        throw json(
-            {message: "Error during searching foods"},
-            {status: 500}
-        );
-    } else {
-        const data = await response.json();
-        console.log(data);
-        return data;
-    }
-}

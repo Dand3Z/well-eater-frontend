@@ -21,7 +21,7 @@ export async function loader() {
     return await loadToDeleteProducts();
 }
 
-async function loadToDeleteProducts(page = 0, size = 10) {
+async function loadToDeleteProducts(page = 0, size = 9) {
     const token = getAuthToken();
     const response = await fetch(`http://localhost:8080/admin/food/get-all-to-delete?page=${page}&size=${size}`, {
         method: 'GET',
