@@ -40,14 +40,15 @@ export async function action({ request }) {
         throw json({ message: "Could not authenticate user"}, { status: 500 });
     }
 
-    const responseData = await response.json();
-    const token = responseData.token;
-    localStorage.setItem('token', token);
-    const roles = responseData.roles;
-    localStorage.setItem('roles', JSON.stringify(roles));
-    const expiration = new Date();
-    expiration.setHours(expiration.getHours() + 12);
-    localStorage.setItem('expiration', expiration.toISOString());
-
+    if (action === "login") {
+        const responseData = await response.json();
+        const token = responseData.token;
+        localStorage.setItem('token', token);
+        const roles = responseData.roles;
+        localStorage.setItem('roles', JSON.stringify(roles));
+        const expiration = new Date();
+        expiration.setHours(expiration.getHours() + 12);
+        localStorage.setItem('expiration', expiration.toISOString());
+    }
     return redirect('/');
 }

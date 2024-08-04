@@ -46,7 +46,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
     return (
         <>
             <h3>Moje Produkty to sekcja w której możesz dodać produkty, których nie znalazłeś dotąd w naszej aktualnej bazie.
-                Wszystkie dodane przez Ciebie pozycje trafią do naszej ogólnej bazy i będą mogły zostać zostać wykorzystane przez innych.
+                Wszystkie dodane przez Ciebie pozycje trafią do naszej ogólnej bazy i będą mogły zostać wykorzystane przez innych użytkowników.
             </h3>
             <ul className={classes.productList}>
                 {products.map((product) => (
