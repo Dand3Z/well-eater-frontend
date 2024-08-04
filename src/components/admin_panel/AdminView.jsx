@@ -4,6 +4,7 @@ import {categoryMapper, typeMapper, unitMapperForProductForm} from "../../util/n
 import {getAuthToken} from "../../util/auth.js";
 import {json} from "react-router-dom";
 import ActionModal from "./ActionModal.jsx";
+import ProductForm from "../my_products/ProductForm.jsx";
 
 function AdminView({ initData, loadPageFunc }) {
     const [deleteProducts, setDeleteProducts] = useState(initData.content);
@@ -13,6 +14,7 @@ function AdminView({ initData, loadPageFunc }) {
     const [isInitialLoad, setIsInitialLoad] = useState(true);
     const [currentProduct, setCurrentProduct] = useState(null);
     const [showActionModal, setShowActionModal] = useState(false);
+    const [showEditForm, setShowEditForm] = useState(false);
     const [currentAction, setCurrentAction] = useState('');
 
     useEffect(() => {
@@ -36,7 +38,7 @@ function AdminView({ initData, loadPageFunc }) {
     function handleKeepActionClick(product) {
         setCurrentProduct(product);
         setCurrentAction('KEEP');
-        setShowActionModal(true);
+        setShowEditForm(true);
     }
 
     function handleDeleteActionClick(product) {
@@ -100,6 +102,14 @@ function AdminView({ initData, loadPageFunc }) {
                         action={currentAction}
                         onCancel={() => setShowActionModal(false)}
                     />
+                </div>
+            )}
+            {showEditForm && (
+                <div className={classes.modalBackdrop}>
+                    <ProductForm
+                        product={currentProduct}
+                        action={'KEEP'}
+                        onCancel={() => setShowEditForm(false)} />
                 </div>
             )}
         </>

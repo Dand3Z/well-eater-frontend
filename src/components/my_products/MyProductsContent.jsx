@@ -101,6 +101,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
                 <div className={classes.modalBackdrop}>
                     <ProductForm
                         product={currentProduct}
+                        action={'ADD_EDIT'}
                         onCancel={() => setShowAddEditForm(false)} />
                 </div>
             )}

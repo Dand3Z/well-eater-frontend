@@ -4,7 +4,7 @@ import {Form, json} from "react-router-dom";
 import {useState} from "react";
 import {categoryMapper, typeMapper, unitMapperForProductForm} from "../../util/nameMappers.js";
 
-function ProductForm({ product, onCancel }) {
+function ProductForm({ product, onCancel, action }) {
     const [name, setName] = useState(product ? product.name : '');
     const [category, setCategory] = useState(product ? product.category : 'VEGETABLE');
     const [type, setType] = useState(product ? product.type : 'SIMPLE_PRODUCT');
@@ -13,6 +13,11 @@ function ProductForm({ product, onCancel }) {
     const [fats, setFats] = useState(product ? product.macros.fats : 0);
     const [proteins, setProteins] = useState(product ? product.macros.proteins : 0);
     const [kcal, setKcal] = useState(product ? product.macros.kcal : 0);
+
+    const actionMap = {
+        'KEEP': keepAndEditFood,
+        'ADD_EDIT': addEditFood
+    };
 
     const categories = [
         'VEGETABLE', 'MEAT', 'FRUIT', 'CHEESE', 'BREAD', 'SWEET', 'MILK', 'EGG', 'WATER', 'JUICE',
@@ -28,8 +33,9 @@ function ProductForm({ product, onCancel }) {
         const foodData = {
             name, category, type, unit, carbs, fats, proteins, kcal,
         };
+        const func = actionMap[action];
         try {
-            await addEditFood(foodData, product ? product.id : undefined);
+            await func(foodData, product ? product.id : undefined);
             window.location.reload();
         } catch (e) {
             console.error("Error occurred during saving new / editing product ", e);
@@ -112,5 +118,27 @@ async function addEditFood(foodData, foodId = undefined) {
         );
     } else {
         return await response.json();
+    }
+}
+
+async function keepAndEditFood(foodData, foodId) {
+    const token = getAuthToken();
+
+    const response = await fetch(`http://localhost:8080/admin/food/to-delete/unmark/${foodId}`, {
+        method: 'PATCH',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(foodData),
+    });
+
+    if (!response.ok) {
+        throw json(
+            {message: "Error during unmarking food"},
+            {status: 500}
+        );
+    } else {
+        return response.ok;
     }
 }
