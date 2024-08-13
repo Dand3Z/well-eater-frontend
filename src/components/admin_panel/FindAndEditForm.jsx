@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import {searchFoodBySubstring} from "../product_base/ProductsView.jsx";
 import {Form} from "react-router-dom";
 import ProductForm from "../my_products/ProductForm.jsx";
+import DeleteProductForm from "../my_products/DeleteProductForm.jsx";
+import ActionModal from "./ActionModal.jsx";
 
 function FindAndEditForm() {
     const [searchText, setSearchText] = useState("");
@@ -12,6 +14,8 @@ function FindAndEditForm() {
     const [isFirstPage, setIsFirstPage] = useState(true);
     const [isLastPage, setIsLastPage] = useState(true);
     const [showEditForm, setShowEditForm] = useState(false);
+    const [showDeleteForm, setShowDeleteForm] = useState(false);
+    const [currentAction, setCurrentAction] = useState('EDIT');
 
     useEffect(() => {
         if (searchText.length > 2) {
@@ -44,8 +48,13 @@ function FindAndEditForm() {
         setSelectedFood(food);
         setSearchText('');
         setSearchResults([]);
-        setShowEditForm(true)
+        actions[currentAction](true);
         console.log('handleSelectFood invoked');
+    };
+
+    const actions = {
+        'EDIT': setShowEditForm,
+        'DELETE': setShowDeleteForm
     };
 
     const handleChangeCurrentPage = (move) => {
@@ -55,9 +64,16 @@ function FindAndEditForm() {
 
     return (
         <div>
-            <h3 className={classes.heading}>Znajdź i edytuj produkt</h3>
+            <div>
+                <h3 className={classes.heading}>{`Znajdź i ${currentAction === 'EDIT' ? 'edytuj' : 'usuń'} produkt`}</h3>
+                <button type={'button'} onClick={() => setCurrentAction(
+                    currentAction === 'EDIT' ? 'DELETE' : 'EDIT')} >
+                    {currentAction === 'EDIT' ? 'Zmień na usuwanie' : 'Zmień na edycję'}
+                </button>
+            </div>
+
             <Form className={classes.form}>
-                <input
+            <input
                     type="text"
                     value={searchText}
                     onChange={handleSearchChange}
@@ -90,6 +106,15 @@ function FindAndEditForm() {
                         product={selectedFood}
                         action={'ADD_EDIT'}
                         onCancel={() => setShowEditForm(false)} />
+                </div>
+            )}
+            {showDeleteForm && (
+                <div className={classes.modalBackdrop}>
+                    <ActionModal
+                        product={selectedFood}
+                        onCancel={() => setShowDeleteForm(false)}
+                        action={currentAction}
+                    />
                 </div>
             )}
         </div>
