@@ -3,6 +3,7 @@ import classes from './MyProductsContent.module.css';
 import {unitMapperForDescription} from "../../util/nameMappers.js";
 import ProductForm from "./ProductForm.jsx";
 import DeleteProductForm from "./DeleteProductForm.jsx";
+import Icon from "../../util/importIcons.jsx";
 
 function MyProductsContent({ initData, loadPageFunc }) {
     const [products, setProducts] = useState(initData.content);
@@ -53,7 +54,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
                     <li className={`${classes.listItem} ${classes.productItem}`} key={product.id}>
                         <div className={classes.productHeader}>
                             <p>{product.name}</p>
-                            <p>Icon: {product.category}</p>
+                            <p><Icon className={'smallIcon'} type={'CATEGORY'} value={product.category}/></p>
                         </div>
                         <div className={classes.macros}>
                             <p className={classes.productDescription}>
