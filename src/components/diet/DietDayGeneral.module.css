@@ -67,7 +67,12 @@
 }
 
 .used {
-    background-color: pink;
+    background-color: #FFC0CB;
+}
+
+.used:hover {
+    background-color: #FFCDD5;
+    transition: all 0.3s;
 }
 
 .unused:hover {

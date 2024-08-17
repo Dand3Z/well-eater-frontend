@@ -2,7 +2,7 @@ import classes from './DietDays.module.css'
 import DietDayGeneral from "./DietDayGeneral.jsx";
 import {useOutletContext} from "react-router-dom";
 import {calculateDate} from "../../util/date.js";
-import DietDaySummary from "./DietDaySummary.jsx";
+import DietDaysSummary from "./DietDaysSummary.jsx";
 
 function getDayData(dietDays, currentMonday, move) {
     const date = calculateDate(currentMonday, move);
@@ -30,7 +30,7 @@ function DietDays() {
                                 date={calculateDate(currentMonday, 6)}/>
             </div>
             <div className={classes.summaryContainer}>
-                <DietDaySummary dietDays={dietDays}/>
+                <DietDaysSummary dietDays={dietDays}/>
             </div>
         </>
     )

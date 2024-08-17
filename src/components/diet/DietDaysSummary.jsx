@@ -1,9 +1,9 @@
-import classes from './DietDaySummary.module.css';
+import classes from './DietDaysSummary.module.css';
 import Icon from "../../util/importIcons.jsx";
 import PieChart from "../general/PieChart.jsx";
 import {calculateMean} from "../../util/food.js";
 
-function DietDaySummary({dietDays}) {
+function DietDaysSummary({dietDays}) {
     const daysAmount = dietDays.length;
     const mean = {
         carbs: calculateMean(dietDays.map(day => day.stats.stats.carbs)),
@@ -41,4 +41,4 @@ function DietDaySummary({dietDays}) {
         </>)
 }
 
-export default DietDaySummary;
+export default DietDaysSummary;
