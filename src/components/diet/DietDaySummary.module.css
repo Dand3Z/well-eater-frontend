@@ -1,0 +1,9 @@
+.summaryContainer {
+    margin-top: 1.5rem;
+}
+
+.summaryHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
