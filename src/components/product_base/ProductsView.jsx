@@ -17,7 +17,6 @@ function ProductsView() {
         if (searchText.length > 2) {
             searchFoodBySubstring(searchText, currentPage, 10)
                 .then(results => {
-                    console.log(results);
                     setSearchResults(results.content);
                     setIsFirstPage(results.first);
                     setIsLastPage(results.last);
@@ -80,41 +79,41 @@ function ProductsView() {
                                 </li>
                             ))}
                         </ul>
-                        <div>
-                            {!isFirstPage && (<button type={"button"}
+                        <div className={classes.buttons}>
+                            {!isFirstPage && (<button className={`${classes.actionBtn} ${classes.prevBtn}`} type={"button"}
                                                       onClick={() => handleChangeCurrentPage(-1)}>&larr;</button>)}
-                            {!isLastPage && (<button type={"button"}
+                            {!isLastPage && (<button className={`${classes.actionBtn} ${classes.nextBtn}`} type={"button"}
                                                      onClick={() => handleChangeCurrentPage(1)}>&rarr;</button>)}
                         </div>
                     </>
                 )}
                 {selectedFood && (
-                    <>
-                        <div className={classes.selectedFood}>
+                    <div className={classes.selectedFood}>
+                        <div className={classes.name}>
                             <p>Wybrano: {selectedFood.name}</p>
                         </div>
                         <div className={classes.stats}>
                             <p className={classes.formLabel}>Wartości referencyjne dla 100 {selectedFood.unit.toLowerCase()}</p>
                             <div className={classes.statsValues}>
-                                <div>
+                                <div className={classes.macro}>
                                     <p>Węglowodany</p>
                                     <p>{selectedFood.macros.carbs}</p>
                                 </div>
-                                <div>
+                                <div className={classes.macro}>
                                     <p>Tłuszcze</p>
                                     <p>{selectedFood.macros.fats}</p>
                                 </div>
-                                <div>
+                                <div className={classes.macro}>
                                     <p>Białko</p>
                                     <p>{selectedFood.macros.proteins}</p>
                                 </div>
-                                <div>
+                                <div className={classes.macro}>
                                     <p>Kcal</p>
                                     <p>{selectedFood.macros.kcal}</p>
                                 </div>
                             </div>
                         </div>
-                    </>
+                    </div>
                 )}
             </Form>
         </div>
