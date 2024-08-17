@@ -14,10 +14,10 @@ function MealGeneral({ data, monday, meal }) {
                     <p>Węglowodany: {data.stats.carbs} g</p>
                 </div>
                 <div>
-                    <p>Tłuszcz: {data.stats.fats} g</p>
+                    <p>Tłuszcze: {data.stats.fats} g</p>
                 </div>
                 <div>
-                    <p>Białko: {data.stats.proteins} g</p>
+                    <p>Białka: {data.stats.proteins} g</p>
                 </div>
                 <div>
                     <p>Kcal: {data.stats.kcal} kcal</p>

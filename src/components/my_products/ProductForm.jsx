@@ -83,7 +83,7 @@ function ProductForm({ product, onCancel, action }) {
                     <input value={fats} onChange={(e) => setFats(e.target.value)} required/>
                 </div>
                 <div className={classes.formGroup}>
-                    <label>Białko</label>
+                    <label>Białka</label>
                     <input value={proteins} onChange={(e) => setProteins(e.target.value)} required/>
                 </div>
                 <div className={classes.formGroup}>

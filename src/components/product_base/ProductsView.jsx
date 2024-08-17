@@ -104,7 +104,7 @@ function ProductsView() {
                                     <p>{selectedFood.macros.fats}</p>
                                 </div>
                                 <div className={classes.macro}>
-                                    <p>Białko</p>
+                                    <p>Białka</p>
                                     <p>{selectedFood.macros.proteins}</p>
                                 </div>
                                 <div className={classes.macro}>

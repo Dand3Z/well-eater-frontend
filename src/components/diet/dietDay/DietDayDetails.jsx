@@ -18,8 +18,8 @@ function DietDayDetails( {...props } ) {
                 </Link>
                 <div className={classes.totalStats}>
                     <p>Węglowodany: {data.stats.stats.carbs} g</p>
-                    <p>Tłuszcz: {data.stats.stats.fats} g</p>
-                    <p>Białko: {data.stats.stats.proteins} g</p>
+                    <p>Tłuszcze: {data.stats.stats.fats} g</p>
+                    <p>Białka: {data.stats.stats.proteins} g</p>
                     <p>Kcal: {data.stats.stats.kcal} kcal</p>
                 </div>
             </div>

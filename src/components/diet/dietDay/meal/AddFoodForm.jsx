@@ -111,7 +111,7 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
                                     <p>{calculateMacro(selectedFood.macros.fats, amount)}</p>
                                 </div>
                                 <div>
-                                    <p>Białko</p>
+                                    <p>Białka</p>
                                     <p>{calculateMacro(selectedFood.macros.proteins, amount)}</p>
                                 </div>
                                 <div>
@@ -132,7 +132,7 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
                                     <p>{selectedFood.macros.fats}</p>
                                 </div>
                                 <div>
-                                    <p>Białko</p>
+                                    <p>Białka</p>
                                     <p>{selectedFood.macros.proteins}</p>
                                 </div>
                                 <div>

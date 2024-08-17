@@ -33,7 +33,7 @@ function EditFoodForm({ food, onSubmit, onCancel }) {
                             <p>{calculateMacro(food.macros.fats, amount)}</p>
                         </div>
                         <div>
-                            <p>Białko</p>
+                            <p>Białka</p>
                             <p>{calculateMacro(food.macros.proteins, amount)}</p>
                         </div>
                         <div>
@@ -54,7 +54,7 @@ function EditFoodForm({ food, onSubmit, onCancel }) {
                             <p>{food.macros.fats}</p>
                         </div>
                         <div>
-                            <p>Białko</p>
+                            <p>Białka</p>
                             <p>{food.macros.proteins}</p>
                         </div>
                         <div>

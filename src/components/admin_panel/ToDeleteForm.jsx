@@ -58,8 +58,8 @@ function ToDeleteForm({ initData, loadPageFunc }) {
                     <th>Typ</th>
                     <th>Jednostka</th>
                     <th>Węglowodany</th>
-                    <th>Tłuszcz</th>
-                    <th>Białko</th>
+                    <th>Tłuszcze</th>
+                    <th>Białka</th>
                     <th>Kcal</th>
                     <th>Akcje</th>
                 </tr>

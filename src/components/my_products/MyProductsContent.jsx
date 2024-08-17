@@ -71,7 +71,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
                                     <p>{product.macros.fats}</p>
                                 </div>
                                 <div>
-                                    <p>Białko</p>
+                                    <p>Białka</p>
                                     <p>{product.macros.proteins}</p>
                                 </div>
                             </div>

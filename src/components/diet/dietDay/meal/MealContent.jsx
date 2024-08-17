@@ -74,8 +74,8 @@ function MealContent( {...props } ) {
                 </Link>
                 <div className={classes.totalStats}>
                     <p>Węglowodany: {data.stats.carbs} g</p>
-                    <p>Tłuszcz: {data.stats.fats} g</p>
-                    <p>Białko: {data.stats.proteins} g</p>
+                    <p>Tłuszcze: {data.stats.fats} g</p>
+                    <p>Białka: {data.stats.proteins} g</p>
                     <p>Kcal: {data.stats.kcal} kcal</p>
                 </div>
             </div>
@@ -94,8 +94,8 @@ function MealContent( {...props } ) {
                                     </div>
                                     <div className={classes.macros}>
                                         <p>Węglowodany: {calculateMacro(food.macros.carbs, food.amount)}</p>
-                                        <p>Tłuszcz: {calculateMacro(food.macros.fats, food.amount)}</p>
-                                        <p>Białko: {calculateMacro(food.macros.proteins, food.amount)}</p>
+                                        <p>Tłuszcze: {calculateMacro(food.macros.fats, food.amount)}</p>
+                                        <p>Białka: {calculateMacro(food.macros.proteins, food.amount)}</p>
                                         <p>Kcal: {calculateMacro(food.macros.kcal, food.amount)}</p>
                                     </div>
                                 </div>

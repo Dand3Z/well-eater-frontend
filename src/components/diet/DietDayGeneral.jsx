@@ -16,8 +16,8 @@ function DietDayGeneral({ day, data, date }) {
                 <Link to={`day/${data.dietDayId}`}>
                     <div className={classes.macros}>
                         <p>Węglowodany: {data.stats.stats.carbs} g</p>
-                        <p>Tłuszcz: {data.stats.stats.fats} g</p>
-                        <p>Białko: {data.stats.stats.proteins} g</p>
+                        <p>Tłuszcze: {data.stats.stats.fats} g</p>
+                        <p>Białka: {data.stats.stats.proteins} g</p>
                         <p>Kcal: {data.stats.stats.kcal} kcal</p>
                     </div>
                 </Link>) : (

@@ -6,7 +6,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 function PieChart({pieData = [100, 200, 300]}) {
     const data = {
-        labels: ['Węglowodany (g)', 'Tłuszcze (g)', 'Białko (g)'],
+        labels: ['Węglowodany (g)', 'Tłuszcze (g)', 'Białka (g)'],
         datasets: [
             {
                 label: 'Średnio w ciągu tygodnia',
