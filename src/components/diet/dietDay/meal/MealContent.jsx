@@ -6,7 +6,7 @@ import EditFoodForm, {editFoodAction} from './EditFoodForm.jsx';
 import {calculateMacro} from "../../../../util/food.js";
 import DeleteFoodForm, {deleteFoodAction} from "./DeleteFoodForm.jsx";
 import AddFoodForm, {addFoodAction} from "./AddFoodForm.jsx";
-import Icon from "../../../../util/importIcons.jsx";
+import Icon from "../../../general/ImportIcons.jsx";
 
 function MealContent( {...props } ) {
     const [mealData, setMealData] = useState(props.responseData);

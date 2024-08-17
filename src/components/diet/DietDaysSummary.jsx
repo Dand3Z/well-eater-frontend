@@ -1,5 +1,5 @@
 import classes from './DietDaysSummary.module.css';
-import Icon from "../../util/importIcons.jsx";
+import Icon from "../general/ImportIcons.jsx";
 import PieChart from "../general/PieChart.jsx";
 import {calculateMean} from "../../util/food.js";
 

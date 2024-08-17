@@ -3,7 +3,7 @@ import classes from './MyProductsContent.module.css';
 import {unitMapperForDescription} from "../../util/nameMappers.js";
 import ProductForm from "./ProductForm.jsx";
 import DeleteProductForm from "./DeleteProductForm.jsx";
-import Icon from "../../util/importIcons.jsx";
+import Icon from "../general/ImportIcons.jsx";
 
 function MyProductsContent({ initData, loadPageFunc }) {
     const [products, setProducts] = useState(initData.content);

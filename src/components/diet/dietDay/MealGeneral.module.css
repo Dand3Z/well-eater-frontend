@@ -20,13 +20,13 @@
 
 .meal {
     height: 21rem;
-    border-radius: 5px;
+    border-radius: 1rem;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #a9be77;
-    gap: 1rem;
+    background-color: #ffefdc;
+    gap: 0.8rem;
 }
 
 .meal a{
@@ -34,18 +34,35 @@
     background-color: transparent;
     color: inherit;
     cursor: pointer;
-    height: 100%;
 }
 
 .dishType {
     padding: 1.4rem 0.4rem 0rem 0.4rem;
+    display: flex;
+    gap: 1rem;
 }
 
 .macros {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     place-items: center;
-    margin: 0 0.2rem 1rem 0.2rem;
-    width: 100%;
-    border: 2px dotted #000000;
+    background-color: #e6d7c6;
+    border-radius: 1rem;
+    transition: all 0.3s;
+}
+
+.macros:hover {
+    background-color: #fff2e3;
+}
+
+.macro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+}
+
+.macro p {
+    margin: 0.2rem;
 }
