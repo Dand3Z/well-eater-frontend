@@ -29,7 +29,9 @@ function DietDays() {
                 <DietDayGeneral day="sunday" data={getDayData(dietDays, currentMonday, 6)}
                                 date={calculateDate(currentMonday, 6)}/>
             </div>
-            <DietDaySummary dietDays={dietDays}/>
+            <div className={classes.summaryContainer}>
+                <DietDaySummary dietDays={dietDays}/>
+            </div>
         </>
     )
 }

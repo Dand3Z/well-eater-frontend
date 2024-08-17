@@ -15,7 +15,7 @@ function ProductsView() {
 
     useEffect(() => {
         if (searchText.length > 2) {
-            searchFoodBySubstring(searchText, currentPage, 10)
+            searchFoodBySubstring(searchText, currentPage, 6)
                 .then(results => {
                     setSearchResults(results.content);
                     setIsFirstPage(results.first);

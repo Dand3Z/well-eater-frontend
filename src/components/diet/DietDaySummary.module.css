@@ -1,9 +1,56 @@
 .summaryContainer {
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 3rem;
 }
 
 .summaryHeader {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.summaryHeader p {
+    font-size: 1.4rem;
+}
+
+.summaryBody {
+    display: flex;
+    gap: 2rem;
+}
+
+.chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+.details p {
+    margin: 0;
+}
+
+.details ul {
+    list-style: disc;
+    padding-top: 0.4rem;
+    padding-left: 2rem;
+}
+
+.details li {
+    padding-top: 0.4rem;
+    font-size: 1.1rem;
+}
+
+.activeDays {
+    font-size: 1.2rem;
+    padding-top: 1rem;
+}
+
+.meanHeading {
+    font-size: 1.2rem;
+    padding-top: 1rem;
 }
