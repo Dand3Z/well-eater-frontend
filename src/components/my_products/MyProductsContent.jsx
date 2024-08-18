@@ -58,7 +58,9 @@ function MyProductsContent({ initData, loadPageFunc }) {
                             <p className={classes.productDescription}>
                                 Wartości kaloryczne w 100 {unitMapperForDescription(product.unit)}
                             </p>
-                            <div className={classes.kcal}>{product.macros.kcal}</div>
+                            <div className={classes.kcal}>
+                                <div>{product.macros.kcal}</div>
+                            </div>
                             <div className={classes.stats}>
                                 <div className={classes.carbs}>
                                     <p>Węgl.</p>

@@ -57,6 +57,12 @@
     margin-bottom: 0.8rem;
 }
 
+.kcal div {
+    background-color: #fd7e14;
+    padding: 0.4rem 1rem;
+    border-radius: 1rem;
+}
+
 .stats {
     display: flex;
     gap: 1rem;
