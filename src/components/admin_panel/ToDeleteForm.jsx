@@ -76,9 +76,9 @@ function ToDeleteForm({ initData, loadPageFunc }) {
                         <td>{product.macros.fats}</td>
                         <td>{product.macros.proteins}</td>
                         <td>{product.macros.kcal}</td>
-                        <td>
-                            <button type={"button"} onClick={() => handleKeepActionClick(product)}>Zachowaj</button>
-                            <button type={"button"} onClick={() => handleDeleteActionClick(product)}>Usuń</button>
+                        <td className={classes.actionBtns}>
+                            <button className={classes.actionBtn} type={"button"} onClick={() => handleKeepActionClick(product)}>Zachowaj</button>
+                            <button className={classes.actionBtn} type={"button"} onClick={() => handleDeleteActionClick(product)}>Usuń</button>
                         </td>
                     </tr>
                 ))}
@@ -86,11 +86,13 @@ function ToDeleteForm({ initData, loadPageFunc }) {
             </table>
             <div className={classes.navigationButtons}>
                 {!isFirstPage &&
-                    <button type={"button"} onClick={() => setCurrentPage((prev) => prev - 1)}>
+                    <button className={`${classes.pageBtn} ${classes.prevBtn}`}
+                            type={"button"} onClick={() => setCurrentPage((prev) => prev - 1)}>
                         &larr;
                     </button>}
                 {!isLastPage &&
-                    <button type={"button"} onClick={() => setCurrentPage((prev) => prev + 1)}>
+                    <button className={`${classes.pageBtn} ${classes.nextBtn}`}
+                            type={"button"} onClick={() => setCurrentPage((prev) => prev + 1)}>
                         &rarr;
                     </button>}
             </div>

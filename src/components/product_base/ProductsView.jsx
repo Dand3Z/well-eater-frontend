@@ -39,18 +39,15 @@ function ProductsView() {
         setSearchText(value);
         setNotFound(false);
         if (currentPage !== 0 || prevSearchText !== value) setCurrentPage(0);
-        console.log('handleSearchChange invoked');
     };
 
     const handleSelectFood = (food) => {
         setSelectedFood(food);
         setSearchText('');
         setSearchResults([]);
-        console.log('handleSelectFood invoked');
     };
 
     const handleChangeCurrentPage = (move) => {
-        console.log('handleChangeCurrentPage invoked');
         setCurrentPage(prevPage => prevPage + move);
     }
 

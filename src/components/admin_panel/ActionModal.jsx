@@ -25,10 +25,11 @@ function ActionModal({ product, onCancel, action }) {
         <div className={classes.modal}>
             <h4 className={classes.heading}>{action==='KEEP' ? 'Zachowaj produkt' : 'Usuń produkt'} {product.name}</h4>
             <Form className={classes.form}>
-
-                <button className={classes.actionBtn} type={"submit"}
-                        onClick={(e) => handleSubmit(e)}>{action==='KEEP' ? 'Zachowaj' : 'Usuń'}</button>
-                <button className={classes.actionBtn} type={"button"} onClick={onCancel}>Anuluj</button>
+                <div className={classes.actionBtns}>
+                    <button className={`${classes.actionBtn} ${classes.saveBtn}`} type={"submit"}
+                            onClick={(e) => handleSubmit(e)}>{action === 'KEEP' ? 'Zachowaj' : 'Usuń'}</button>
+                    <button className={`${classes.actionBtn} ${classes.cancelBtn}`} type={"button"} onClick={onCancel}>Anuluj</button>
+                </div>
             </Form>
         </div>
     )

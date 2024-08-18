@@ -7,7 +7,7 @@
 .table th {
     padding-top: 12px;
     padding-bottom: 12px;
-    background-color: #4CAF50;
+    /*background-color: #4CAF50;*/
     color: white;
     text-align: center;
 }
@@ -20,11 +20,6 @@
 .table td {
     border: 1px solid #ddd;
     padding: 8px;
-}
-
-.table th {
-    background-color: #f2f2f2;
-    color: black;
 }
 
 .table tr:nth-child(even) {
@@ -42,8 +37,49 @@
     color: white;
 }
 
+.actionBtns {
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.actionBtn{
+    padding: 0.2rem 0.4rem;
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, #e6d7c6 0px 0px 0px 1px;
+    border-radius: 0.25rem;
+    background-color: #ffe8cc;
+}
+
 .navigationButtons {
     display: flex;
+}
+
+.pageBtn {
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    background-color: #f0be39;
+    border-radius: 0.5rem;
+}
+
+.pageBtn:hover,
+.pageBtn:active {
+    background-color: #ffd43b;
+    transition: all 0.5s;
+}
+
+.prevBtn {
+    margin-right: auto;
+}
+
+.nextBtn {
+    margin-left: auto;
 }
 
 .modalBackdrop {
