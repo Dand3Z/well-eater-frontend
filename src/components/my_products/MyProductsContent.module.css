@@ -14,7 +14,7 @@
 }
 
 .productItem {
-    background-color: #e0f5ba;
+    background-color: #E6F7C8;
 }
 
 .addProduct {
@@ -90,6 +90,25 @@
 
 .navigationButtons {
     display: flex;
+    margin: 0.5rem 0 3rem 0;
+}
+
+.pageBtn {
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    background-color: #f0be39;
+    border-radius: 0.5rem;
+}
+
+.prevBtn {
+    margin-right: auto;
+}
+
+.nextBtn {
+    margin-left: auto;
 }
 
 .modalBackdrop {
@@ -121,10 +140,10 @@
     cursor: pointer;
     border: none;
     border-radius: 0.3rem;
-    background-color: #b2f2bb;
+    background-color: #e1cdb4;
     transition: all 0.3s;
 }
 
 .actionButtons button:hover {
-    background-color: #8ce99a;
+    background-color: #efd9be;
 }

@@ -123,6 +123,9 @@
 }
 
 .categoryBox {
+    padding: 0.5rem;
+    background-color: rgba(230, 209, 184, 0.63);
+    border-radius: 1rem;
     margin: auto;
     display: flex;
     flex-direction: column;

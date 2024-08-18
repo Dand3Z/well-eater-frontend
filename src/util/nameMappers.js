@@ -59,7 +59,7 @@ export function categoryMapper(category) {
         'SOUP': 'Zupy',
         'DISH': 'Dania obiadowe',
         'DESSERT': 'Desery',
-        'FAST_FOOD': 'Fast Foody',
+        'FAST_FOOD': 'Fast Food',
         'OTHER': 'Inne'
     };
     return categoryMap[category] || category;

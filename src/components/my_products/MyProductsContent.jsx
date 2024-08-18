@@ -23,8 +23,6 @@ function MyProductsContent({ initData, loadPageFunc }) {
 
         loadPageFunc(currentPage)
             .then(results => {
-                console.log('useEffect log');
-                console.log(results);
                 setProducts(results.content);
                 setIsFirstPage(results.first);
                 setIsLastPage(results.last);
@@ -71,7 +69,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
                                     <p>{product.macros.fats}</p>
                                 </div>
                                 <div className={classes.proteins}>
-                                    <p>Biał</p>
+                                    <p>Biał.</p>
                                     <p>{product.macros.proteins}</p>
                                 </div>
                             </div>
@@ -93,11 +91,13 @@ function MyProductsContent({ initData, loadPageFunc }) {
             </ul>
             <div className={classes.navigationButtons}>
                 {!isFirstPage &&
-                    <button type={"button"} onClick={() => setCurrentPage((prev) => prev - 1)}>
+                    <button className={`${classes.pageBtn} ${classes.prevBtn}`}
+                            type={"button"} onClick={() => setCurrentPage((prev) => prev - 1)}>
                         &larr;
                     </button>}
                 {!isLastPage &&
-                    <button type={"button"} onClick={() => setCurrentPage((prev) => prev + 1)}>
+                    <button className={`${classes.pageBtn} ${classes.nextBtn}`}
+                            type={"button"} onClick={() => setCurrentPage((prev) => prev + 1)}>
                         &rarr;
                     </button>}
             </div>
