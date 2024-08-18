@@ -27,15 +27,9 @@
   --color-gray-800: #31302e;
   --color-gray-900: #1f1d1b;
 
-  --color-primary-100: #fcf3e1;
-  --color-primary-200: #fceccd;
-  --color-primary-300: #fae1af;
-  --color-primary-400: #fbd997;
-  --color-primary-500: #ffd37c;
-  --color-primary-600: #f9c762;
-  --color-primary-700: #fbc14d;
-  --color-primary-800: #fab833;
-  --color-primary-900: #f6ad1b;
+  --color-primary: #f0be39;
+  --color-secondary: #ffd43b;
+  --color-tertiary: #fff4e6;
 }
 
 body {

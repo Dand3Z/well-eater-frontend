@@ -3,6 +3,7 @@ import classes from './MyProductsContent.module.css';
 import {unitMapperForDescription} from "../../util/nameMappers.js";
 import ProductForm from "./ProductForm.jsx";
 import DeleteProductForm from "./DeleteProductForm.jsx";
+import Icon from "../general/ImportIcons.jsx";
 
 function MyProductsContent({ initData, loadPageFunc }) {
     const [products, setProducts] = useState(initData.content);
@@ -22,8 +23,6 @@ function MyProductsContent({ initData, loadPageFunc }) {
 
         loadPageFunc(currentPage)
             .then(results => {
-                console.log('useEffect log');
-                console.log(results);
                 setProducts(results.content);
                 setIsFirstPage(results.first);
                 setIsLastPage(results.last);
@@ -53,7 +52,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
                     <li className={`${classes.listItem} ${classes.productItem}`} key={product.id}>
                         <div className={classes.productHeader}>
                             <p>{product.name}</p>
-                            <p>Icon: {product.category}</p>
+                            <Icon className={'smallIcon'} type={'CATEGORY'} value={product.category}/>
                         </div>
                         <div className={classes.macros}>
                             <p className={classes.productDescription}>
@@ -61,16 +60,16 @@ function MyProductsContent({ initData, loadPageFunc }) {
                             </p>
                             <div className={classes.kcal}>{product.macros.kcal}</div>
                             <div className={classes.stats}>
-                                <div>
-                                    <p>Węglowodany</p>
+                                <div className={classes.carbs}>
+                                    <p>Węgl.</p>
                                     <p>{product.macros.carbs}</p>
                                 </div>
-                                <div>
-                                    <p>Tłuszcze</p>
+                                <div className={classes.fats}>
+                                    <p>Tłu.</p>
                                     <p>{product.macros.fats}</p>
                                 </div>
-                                <div>
-                                    <p>Białko</p>
+                                <div className={classes.proteins}>
+                                    <p>Biał.</p>
                                     <p>{product.macros.proteins}</p>
                                 </div>
                             </div>
@@ -92,11 +91,13 @@ function MyProductsContent({ initData, loadPageFunc }) {
             </ul>
             <div className={classes.navigationButtons}>
                 {!isFirstPage &&
-                    <button type={"button"} onClick={() => setCurrentPage((prev) => prev - 1)}>
+                    <button className={`${classes.pageBtn} ${classes.prevBtn}`}
+                            type={"button"} onClick={() => setCurrentPage((prev) => prev - 1)}>
                         &larr;
                     </button>}
                 {!isLastPage &&
-                    <button type={"button"} onClick={() => setCurrentPage((prev) => prev + 1)}>
+                    <button className={`${classes.pageBtn} ${classes.nextBtn}`}
+                            type={"button"} onClick={() => setCurrentPage((prev) => prev + 1)}>
                         &rarr;
                     </button>}
             </div>

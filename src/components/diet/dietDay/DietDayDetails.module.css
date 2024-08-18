@@ -6,6 +6,17 @@
     row-gap: 3rem;
 }
 
+.backward {
+    padding: 0.3rem;
+    border-radius: 1rem;
+    background-color: #f0be39;
+    transition: all 0.3s;
+}
+
+.backward:hover {
+    background-color: #ffd43b;
+}
+
 .dayHeader {
     display: flex;
     justify-content: space-between;

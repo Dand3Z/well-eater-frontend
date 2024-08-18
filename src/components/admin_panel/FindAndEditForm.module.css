@@ -14,6 +14,7 @@
 
 .heading {
     text-align: left;
+    margin: 0.5rem;
 }
 
 .form {
@@ -32,7 +33,7 @@
     padding: 8px;
     margin-bottom: 10px;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid #f0be39;
 }
 
 .searchResults {
@@ -40,7 +41,8 @@
     padding: 0;
     margin: 0;
     background: white;
-    border: 1px solid #ccc;
+    border: 1px solid #f0be39;
+    border-radius: 0.5rem;
     max-height: 200px;
     overflow-y: auto;
 }
@@ -51,12 +53,29 @@
 }
 
 .searchResults li:hover {
-    background: #eee;
+    background: #fff4e6;
 }
 
 .selectedFood {
     margin-bottom: 10px;
     font-weight: bold;
+}
+
+.changeActionBtn {
+    padding: 0.2rem 0.4rem;
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, #e6d7c6 0px 0px 0px 1px;
+    border-radius: 0.25rem;
+    background-color: #ffe8cc;
+}
+
+.formLabel {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .stats {
@@ -80,9 +99,30 @@
     align-items: center;
 }
 
-.formLabel {
+.pageButtons {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.1rem;
+}
+
+.pageBtn {
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    background-color: #f0be39;
+    border-radius: 0.5rem;
+}
+
+.pageBtn:hover,
+.pageBtn:active {
+    background-color: #ffd43b;
+    transition: all 0.5s;
+}
+
+.prevBtn {
+    margin-right: auto;
+}
+
+.nextBtn {
+    margin-left: auto;
 }

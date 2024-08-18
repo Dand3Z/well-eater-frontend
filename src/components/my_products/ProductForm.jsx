@@ -13,6 +13,29 @@ function ProductForm({ product, onCancel, action }) {
     const [fats, setFats] = useState(product ? product.macros.fats : 0);
     const [proteins, setProteins] = useState(product ? product.macros.proteins : 0);
     const [kcal, setKcal] = useState(product ? product.macros.kcal : 0);
+    const [isSubmitActive, setIsSubmitActive] = useState(false);
+    const [validations, setValidations] = useState({
+        'name': {
+            isValid: product !== undefined,
+            hiddenMessage: true
+        },
+        'carbs': {
+            isValid: product !== undefined,
+            hiddenMessage: true
+        },
+        'fats': {
+            isValid: product !== undefined,
+            hiddenMessage: true
+        },
+        'proteins': {
+            isValid: product !== undefined,
+            hiddenMessage: true
+        },
+        'kcal': {
+            isValid: product !== undefined,
+            hiddenMessage: true
+        },
+    });
 
     const actionMap = {
         'KEEP': keepAndEditFood,
@@ -42,17 +65,56 @@ function ProductForm({ product, onCancel, action }) {
         }
     }
 
+    function isValidName(name) {
+        const result = name.length > 0;
+        setValidations((prevState) => ({
+            ...prevState,
+            name: {
+                isValid: result,
+                hiddenMessage: false
+            }
+        }));
+        return result;
+    }
+
+    function isValidMacroValue(type, value) {
+        const num = Number(value);
+        const result = value !== undefined && !isNaN(num) && num >= 0;
+        setValidations((prevState) => ({
+            ...prevState,
+            [type]: {
+                isValid: result,
+                hiddenMessage: false
+            }
+        }));
+        return result;
+    }
+
+    function validateForm() {
+        for (let val in validations) {
+            if(!validations[val].isValid) {
+                return setIsSubmitActive(false);
+            }
+        }
+        return setIsSubmitActive(true);
+    }
+
     return (
         <div className={classes.modal}>
             <h4 className={classes.heading}>{product ? 'Edytuj produkt' : 'Dodaj nowy produkt'}</h4>
             <Form onSubmit={handleSubmit} className={classes.form}>
                 <div className={classes.formGroup}>
                     <label>Nazwa</label>
-                    <input value={name} onChange={(e) => setName(e.target.value)} required/>
+                    <input className={classes.formInput} value={name} onChange={(e) => {
+                        setName(e.target.value);
+                        isValidName(e.target.value);
+                        validateForm();
+                    }} required/>
+                    {!validations.name.hiddenMessage && !validations.name.isValid && (<span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
                 </div>
                 <div className={classes.formGroup}>
                     <label>Kategoria</label>
-                    <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+                    <select className={classes.formSelect} value={category} onChange={(e) => setCategory(e.target.value)} required>
                         {categories.map(category => (
                             <option key={category} value={category}>{categoryMapper(category)}</option>
                         ))}
@@ -60,7 +122,7 @@ function ProductForm({ product, onCancel, action }) {
                 </div>
                 <div className={classes.formGroup}>
                     <label>Typ</label>
-                    <select value={type} onChange={(e) => setType(e.target.value)} required>
+                    <select className={classes.formSelect} value={type} onChange={(e) => setType(e.target.value)} required>
                         {types.map(type => (
                             <option key={type} value={type}>{typeMapper(type)}</option>
                         ))}
@@ -68,7 +130,7 @@ function ProductForm({ product, onCancel, action }) {
                 </div>
                 <div className={classes.formGroup}>
                     <label>Jednostka</label>
-                    <select value={unit} onChange={(e) => setUnit(e.target.value)} required>
+                    <select className={classes.formSelect} value={unit} onChange={(e) => setUnit(e.target.value)} required>
                         {units.map(unit => (
                             <option key={unit} value={unit}>{unitMapperForProductForm(unit)}</option>
                         ))}
@@ -76,22 +138,42 @@ function ProductForm({ product, onCancel, action }) {
                 </div>
                 <div className={classes.formGroup}>
                     <label>Węglowodany</label>
-                    <input value={carbs} onChange={(e) => setCarbs(e.target.value)} required/>
+                    <input className={classes.formInput} value={carbs} onChange={(e) => {
+                        setCarbs(e.target.value);
+                        isValidMacroValue('carbs', e.target.value);
+                        validateForm();
+                    }} required/>
+                    {!validations.carbs.hiddenMessage && !validations.carbs.isValid && (<span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
                 </div>
                 <div className={classes.formGroup}>
                     <label>Tłuszcze</label>
-                    <input value={fats} onChange={(e) => setFats(e.target.value)} required/>
+                    <input className={classes.formInput} value={fats} onChange={(e) => {
+                        setFats(e.target.value);
+                        isValidMacroValue('fats', e.target.value);
+                        validateForm();
+                    }} required/>
+                    {!validations.fats.hiddenMessage && !validations.fats.isValid && (<span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
                 </div>
                 <div className={classes.formGroup}>
-                    <label>Białko</label>
-                    <input value={proteins} onChange={(e) => setProteins(e.target.value)} required/>
+                    <label>Białka</label>
+                    <input className={classes.formInput} value={proteins} onChange={(e) => {
+                        setProteins(e.target.value);
+                        isValidMacroValue('proteins', e.target.value);
+                        validateForm();
+                    }} required/>
+                    {!validations.proteins.hiddenMessage && !validations.proteins.isValid && (<span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
                 </div>
                 <div className={classes.formGroup}>
                     <label>Kalorie</label>
-                    <input value={kcal} onChange={(e) => setKcal(e.target.value)} required/>
+                    <input className={classes.formInput} value={kcal} onChange={(e) => {
+                        setKcal(e.target.value);
+                        isValidMacroValue('kcal', e.target.value);
+                        validateForm();
+                    }} required/>
+                    {!validations.kcal.hiddenMessage && !validations.kcal.isValid && (<span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
                 </div>
-                <button className={classes.actionBtn} type={"submit"} onClick={handleSubmit}>{product ? 'Zapisz' : 'Dodaj'}</button>
-                <button className={classes.actionBtn} type={"button"} onClick={onCancel}>Anuluj</button>
+                <button className={`${classes.actionBtn} ${classes.saveBtn}`} type={"submit"} onClick={handleSubmit} disabled={!isSubmitActive}>{product ? 'Zapisz' : 'Dodaj'}</button>
+                <button className={`${classes.actionBtn} ${classes.cancelBtn}`} type={"button"} onClick={onCancel}>Anuluj</button>
             </Form>
         </div>);
 }

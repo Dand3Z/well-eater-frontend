@@ -13,8 +13,8 @@ function DeleteFoodForm({ food, onSubmit, onCancel }) {
         <div className={classes.modal}>
             <h4 className={classes.heading}>Usuń produkt: {food.name}</h4>
             <Form onSubmit={handleSubmit} className={classes.form}>
-                <button className={classes.actionBtn} type={"submit"}>Usuń</button>
-                <button className={classes.actionBtn} type={"button"} onClick={onCancel}>Anuluj</button>
+                <button className={`${classes.actionBtn} ${classes.saveBtn}`} type={"submit"}>Usuń</button>
+                <button className={`${classes.actionBtn} ${classes.cancelBtn}`} type={"button"} onClick={onCancel}>Anuluj</button>
             </Form>
         </div>
     )

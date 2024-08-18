@@ -15,9 +15,8 @@ function ProductsView() {
 
     useEffect(() => {
         if (searchText.length > 2) {
-            searchFoodBySubstring(searchText, currentPage, 10)
+            searchFoodBySubstring(searchText, currentPage, 6)
                 .then(results => {
-                    console.log(results);
                     setSearchResults(results.content);
                     setIsFirstPage(results.first);
                     setIsLastPage(results.last);
@@ -40,18 +39,15 @@ function ProductsView() {
         setSearchText(value);
         setNotFound(false);
         if (currentPage !== 0 || prevSearchText !== value) setCurrentPage(0);
-        console.log('handleSearchChange invoked');
     };
 
     const handleSelectFood = (food) => {
         setSelectedFood(food);
         setSearchText('');
         setSearchResults([]);
-        console.log('handleSelectFood invoked');
     };
 
     const handleChangeCurrentPage = (move) => {
-        console.log('handleChangeCurrentPage invoked');
         setCurrentPage(prevPage => prevPage + move);
     }
 
@@ -80,41 +76,41 @@ function ProductsView() {
                                 </li>
                             ))}
                         </ul>
-                        <div>
-                            {!isFirstPage && (<button type={"button"}
+                        <div className={classes.buttons}>
+                            {!isFirstPage && (<button className={`${classes.actionBtn} ${classes.prevBtn}`} type={"button"}
                                                       onClick={() => handleChangeCurrentPage(-1)}>&larr;</button>)}
-                            {!isLastPage && (<button type={"button"}
+                            {!isLastPage && (<button className={`${classes.actionBtn} ${classes.nextBtn}`} type={"button"}
                                                      onClick={() => handleChangeCurrentPage(1)}>&rarr;</button>)}
                         </div>
                     </>
                 )}
                 {selectedFood && (
-                    <>
-                        <div className={classes.selectedFood}>
+                    <div className={classes.selectedFood}>
+                        <div className={classes.name}>
                             <p>Wybrano: {selectedFood.name}</p>
                         </div>
                         <div className={classes.stats}>
                             <p className={classes.formLabel}>Wartości referencyjne dla 100 {selectedFood.unit.toLowerCase()}</p>
                             <div className={classes.statsValues}>
-                                <div>
+                                <div className={classes.macro}>
                                     <p>Węglowodany</p>
                                     <p>{selectedFood.macros.carbs}</p>
                                 </div>
-                                <div>
+                                <div className={classes.macro}>
                                     <p>Tłuszcze</p>
                                     <p>{selectedFood.macros.fats}</p>
                                 </div>
-                                <div>
-                                    <p>Białko</p>
+                                <div className={classes.macro}>
+                                    <p>Białka</p>
                                     <p>{selectedFood.macros.proteins}</p>
                                 </div>
-                                <div>
+                                <div className={classes.macro}>
                                     <p>Kcal</p>
                                     <p>{selectedFood.macros.kcal}</p>
                                 </div>
                             </div>
                         </div>
-                    </>
+                    </div>
                 )}
             </Form>
         </div>

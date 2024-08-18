@@ -13,18 +13,21 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
     const [currentPage, setCurrentPage] = useState(0);
     const [isFirstPage, setIsFirstPage] = useState(true);
     const [isLastPage, setIsLastPage] = useState(true);
+    const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
         if (searchText.length > 2) {
-            searchFoodBySubstring(searchText, currentPage, 10)
+            searchFoodBySubstring(searchText, currentPage, 6)
                 .then(results => {
                     console.log(results);
                     setSearchResults(results.content);
                     setIsFirstPage(results.first);
                     setIsLastPage(results.last);
+                    setNotFound(results.content.length === 0);
                 })
                 .catch(error => {
                     console.error('Error fetching search results:', error);
+                    setNotFound(true);
                 });
         } else {
             setSearchResults([]);
@@ -42,6 +45,7 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
         const value = e.target.value;
         const prevSearchText = searchText;
         setSearchText(value);
+        setNotFound(false);
         if (currentPage !== 0 || prevSearchText !== value) setCurrentPage(0);
         console.log('handleSearchChange invoked');
     };
@@ -68,6 +72,9 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
                     onChange={handleSearchChange}
                     placeholder="Wyszukaj produkt"
                 />
+                {notFound && (
+                    <h6>Produkt nie został znaleziony. Może chciałbyś go sam dodać? Możesz to zrobić z poziomu sekcji Moje Produkty</h6>
+                )}
                 {searchResults.length > 0 && (
                     <>
                         <ul className={classes.searchResults}>
@@ -80,10 +87,10 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
                                 </li>
                             ))}
                         </ul>
-                        <div>
-                            {!isFirstPage && (<button type={"button"}
+                        <div className={classes.pageBtns}>
+                            {!isFirstPage && (<button className={`${classes.pageBtn} ${classes.prevPageBtn}`} type={"button"}
                                                       onClick={() => handleChangeCurrentPage(-1)}>&larr;</button>)}
-                            {!isLastPage && (<button type={"button"}
+                            {!isLastPage && (<button className={`${classes.pageBtn} ${classes.nextPageBtn}`} type={"button"}
                                                      onClick={() => handleChangeCurrentPage(1)}>&rarr;</button>)}
                         </div>
                     </>
@@ -99,7 +106,7 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
                             onChange={(e) => setAmount(e.target.value)}
                             placeholder={`Ilość w ${unitMapperForDescription(selectedFood.unit)}`}
                         />
-                        <div className={classes.stats}>
+                        <div className={`${classes.stats} ${classes.dynamicStats}`}>
                             <p className={classes.formLabel}>Wartości dla zadanej ilości</p>
                             <div className={classes.statsValues}>
                                 <div>
@@ -111,7 +118,7 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
                                     <p>{calculateMacro(selectedFood.macros.fats, amount)}</p>
                                 </div>
                                 <div>
-                                    <p>Białko</p>
+                                    <p>Białka</p>
                                     <p>{calculateMacro(selectedFood.macros.proteins, amount)}</p>
                                 </div>
                                 <div>
@@ -120,7 +127,7 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
                                 </div>
                             </div>
                         </div>
-                        <div className={classes.stats}>
+                        <div className={`${classes.stats} ${classes.staticStats}`}>
                             <p className={classes.formLabel}>Wartości referencyjne dla 100 {selectedFood.unit.toLowerCase()}</p>
                             <div className={classes.statsValues}>
                                 <div>
@@ -132,7 +139,7 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
                                     <p>{selectedFood.macros.fats}</p>
                                 </div>
                                 <div>
-                                    <p>Białko</p>
+                                    <p>Białka</p>
                                     <p>{selectedFood.macros.proteins}</p>
                                 </div>
                                 <div>
@@ -143,8 +150,8 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
                         </div>
                     </>
                 )}
-                <button className={classes.actionBtn} type={"submit"}>Zapisz</button>
-                <button className={classes.actionBtn} type={"button"} onClick={onCancel}>Anuluj</button>
+                <button className={`${classes.actionBtn} ${classes.saveBtn}`} type={"submit"}>Zapisz</button>
+                <button className={`${classes.actionBtn} ${classes.cancelBtn}`} onClick={onCancel}>Anuluj</button>
             </Form>
         </div>
     )

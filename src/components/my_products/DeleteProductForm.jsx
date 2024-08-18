@@ -15,14 +15,12 @@ function DeleteProductForm({ product, onCancel }) {
         }
     }
 
-    console.log(product);
-
     return (
         <div className={classes.modal}>
             <h4 className={classes.heading}>Usuń produkt: {product.name}</h4>
             <Form onSubmit={handleSubmit} className={classes.form}>
-                <button className={classes.actionBtn} type={"submit"}>Usuń</button>
-                <button className={classes.actionBtn} type={"button"} onClick={onCancel}>Anuluj</button>
+                <button className={`${classes.actionBtn} ${classes.saveBtn}`} type={"submit"}>Usuń</button>
+                <button className={`${classes.actionBtn} ${classes.cancelBtn}`} type={"button"} onClick={onCancel}>Anuluj</button>
             </Form>
         </div>
     )

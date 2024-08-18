@@ -7,3 +7,41 @@
     width: 100%;
     z-index: 11;
 }
+
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
+.actionBtns {
+    display: flex;
+}
+
+.actionBtn {
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, #e6d7c6 0px 0px 0px 1px;
+    border-radius: 0.25rem;
+}
+
+.saveBtn {
+    background-color: #ffd8a8;
+}
+
+.saveBtn:hover {
+    background-color: #ffc078;
+}
+
+.cancelBtn {
+    background-color: inherit;
+}
+
+.cancelBtn:hover {
+    background-color: #fff4e6;
+}

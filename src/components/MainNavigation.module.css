@@ -29,12 +29,11 @@
     padding: 1rem;
     background-color: #f0be39;
     border-radius: 1rem;
+    transition: all 1s;
 }
 
 .auth:hover {
-    background-color: #a9be77;
-    transition: all 1s;
-
+    background-color: #ffd43b;
 }
 
 .auth a,

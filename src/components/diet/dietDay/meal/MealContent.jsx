@@ -1,11 +1,12 @@
 import classes from './MealContent.module.css';
 import {Link} from "react-router-dom";
-import {mealTypeMapper} from "../../../../util/nameMappers.js";
+import {categoryMapper, mealTypeMapper} from "../../../../util/nameMappers.js";
 import {useState} from "react";
 import EditFoodForm, {editFoodAction} from './EditFoodForm.jsx';
 import {calculateMacro} from "../../../../util/food.js";
 import DeleteFoodForm, {deleteFoodAction} from "./DeleteFoodForm.jsx";
 import AddFoodForm, {addFoodAction} from "./AddFoodForm.jsx";
+import Icon from "../../../general/ImportIcons.jsx";
 
 function MealContent( {...props } ) {
     const [mealData, setMealData] = useState(props.responseData);
@@ -69,17 +70,23 @@ function MealContent( {...props } ) {
         <>
             <div className={classes.mealNav}>
                 <Link to={`/diet/${mondayDate}/day/${dietDayId}`}>
-                    <div>Wróć</div>
+                    <div className={classes.backward}>
+                        <Icon className={'smallIcon'} type={'NAV'} value={'BACKWARD'}/>
+                    </div>
                 </Link>
                 <div className={classes.totalStats}>
+                    <Icon className={'smallIcon'} type={'NAV'} value={'CHART_BAR'}/>
+                    <p>Statystyki dania:</p>
                     <p>Węglowodany: {data.stats.carbs} g</p>
-                    <p>Tłuszcz: {data.stats.fats} g</p>
-                    <p>Białko: {data.stats.proteins} g</p>
-                    <p>Kcal: {data.stats.kcal} kcal</p>
+                    <p>Tłuszcze: {data.stats.fats} g</p>
+                    <p>Białka: {data.stats.proteins} g</p>
+                    <p>&rarr; {data.stats.kcal} kcal</p>
                 </div>
             </div>
+
             <div className={classes.mealContainer}>
                 <div className={classes.mealHeader}>
+                    <Icon className={'bigIcon'} type={'MEAL'} value={data.mealType} />
                     <h3>{mealTypeMapper(data.mealType)}</h3>
                 </div>
                 <ul className={classes.foods}>
@@ -89,16 +96,35 @@ function MealContent( {...props } ) {
                                 <div className={classes.foodDetails}>
                                     <div className={classes.foodName}>
                                         <h4>{food.name}</h4>
-                                        <p>amount: {food.amount} {food.unit}</p>
+                                        <p>Ilość: {food.amount} {food.unit.toLowerCase()}</p>
                                     </div>
                                     <div className={classes.macros}>
-                                        <p>carbs: {calculateMacro(food.macros.carbs, food.amount)}</p>
-                                        <p>fats: {calculateMacro(food.macros.fats, food.amount)}</p>
-                                        <p>proteins: {calculateMacro(food.macros.proteins, food.amount)}</p>
-                                        <p>kcal: {calculateMacro(food.macros.kcal, food.amount)}</p>
+                                        <div className={classes.macro}>
+                                            <p>Węglowodany</p>
+                                            <p>{calculateMacro(food.macros.carbs, food.amount)} g</p>
+                                        </div>
+                                        <div className={classes.macro}>
+                                            <p>Tłuszcze</p>
+                                            <p>{calculateMacro(food.macros.fats, food.amount)} g</p>
+                                        </div>
+                                        <div className={classes.macro}>
+                                            <p>Białka</p>
+                                            <p>{calculateMacro(food.macros.proteins, food.amount)} g</p>
+                                        </div>
+                                        <div className={classes.macro}>
+                                            <p>Kcal</p>
+                                            <p>{calculateMacro(food.macros.kcal, food.amount)}</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <p className={classes.icon}>icon: {food.category}</p>
+                                <div className={classes.categoryBox}>
+                                    <p className={classes.categoryHeading}>Kategoria</p>
+                                    <div className={classes.categoryIcon}>
+                                        <p className={classes.icon}>{categoryMapper(food.category)}</p>
+                                        <Icon className={'smallIcon'} type={'CATEGORY'} value={food.category}/>
+                                    </div>
+
+                                </div>
                             </div>
                             <div className={classes.foodActions}>
                                 <button onClick={() => handleEditClick(food)}>

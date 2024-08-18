@@ -7,9 +7,6 @@ import {getAuthToken} from "../../util/auth.js";
 function DietDayGeneral({ day, data, date }) {
     const { currentMonday } = useOutletContext();
     const submit = useSubmit();
-    // if data === undefined -> not used day, init it
-    console.log(day);
-    console.log(data);
     return (
         <div className={`${classes[day]} ${classes.day} ${data === undefined ? classes.unused : classes.used}`}>
             <div className={classes.title}>
@@ -19,8 +16,8 @@ function DietDayGeneral({ day, data, date }) {
                 <Link to={`day/${data.dietDayId}`}>
                     <div className={classes.macros}>
                         <p>Węglowodany: {data.stats.stats.carbs} g</p>
-                        <p>Tłuszcz: {data.stats.stats.fats} g</p>
-                        <p>Białko: {data.stats.stats.proteins} g</p>
+                        <p>Tłuszcze: {data.stats.stats.fats} g</p>
+                        <p>Białka: {data.stats.stats.proteins} g</p>
                         <p>Kcal: {data.stats.stats.kcal} kcal</p>
                     </div>
                 </Link>) : (
@@ -37,8 +34,6 @@ function DietDayGeneral({ day, data, date }) {
         </div>
     )
 }
-
-//data.date -> 2024-07-20
 
 export default DietDayGeneral;
 

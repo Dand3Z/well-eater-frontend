@@ -41,7 +41,6 @@ function FindAndEditForm() {
         const prevSearchText = searchText;
         setSearchText(value);
         if (currentPage !== 0 || prevSearchText !== value) setCurrentPage(0);
-        console.log('handleSearchChange invoked');
     };
 
     const handleSelectFood = (food) => {
@@ -49,7 +48,6 @@ function FindAndEditForm() {
         setSearchText('');
         setSearchResults([]);
         actions[currentAction](true);
-        console.log('handleSelectFood invoked');
     };
 
     const actions = {
@@ -58,22 +56,24 @@ function FindAndEditForm() {
     };
 
     const handleChangeCurrentPage = (move) => {
-        console.log('handleChangeCurrentPage invoked');
         setCurrentPage(prevPage => prevPage + move);
     }
 
     return (
         <div>
             <div>
-                <h3 className={classes.heading}>{`Znajdź i ${currentAction === 'EDIT' ? 'edytuj' : 'usuń'} produkt`}</h3>
-                <button type={'button'} onClick={() => setCurrentAction(
-                    currentAction === 'EDIT' ? 'DELETE' : 'EDIT')} >
-                    {currentAction === 'EDIT' ? 'Zmień na usuwanie' : 'Zmień na edycję'}
-                </button>
+                <div className={classes.formLabel}>
+                    <h3 className={classes.heading}>{`Znajdź i ${currentAction === 'EDIT' ? 'edytuj' : 'usuń'} produkt`}</h3>
+                    <button className={classes.changeActionBtn} type={'button'} onClick={() => setCurrentAction(
+                        currentAction === 'EDIT' ? 'DELETE' : 'EDIT')}>
+                        {currentAction === 'EDIT' ? 'Zmień na usuwanie' : 'Zmień na edycję'}
+                    </button>
+                </div>
+
             </div>
 
             <Form className={classes.form}>
-            <input
+                <input
                     type="text"
                     value={searchText}
                     onChange={handleSearchChange}
@@ -91,10 +91,10 @@ function FindAndEditForm() {
                                 </li>
                             ))}
                         </ul>
-                        <div>
-                            {!isFirstPage && (<button type={"button"}
+                        <div className={classes.pageButtons}>
+                            {!isFirstPage && (<button className={`${classes.pageBtn} ${classes.prevBtn}`} type={"button"}
                                                       onClick={() => handleChangeCurrentPage(-1)}>&larr;</button>)}
-                            {!isLastPage && (<button type={"button"}
+                            {!isLastPage && (<button className={`${classes.pageBtn} ${classes.nextBtn}`} type={"button"}
                                                      onClick={() => handleChangeCurrentPage(1)}>&rarr;</button>)}
                         </div>
                     </>
