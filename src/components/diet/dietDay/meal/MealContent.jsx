@@ -70,17 +70,22 @@ function MealContent( {...props } ) {
         <>
             <div className={classes.mealNav}>
                 <Link to={`/diet/${mondayDate}/day/${dietDayId}`}>
-                    <div>Wróć</div>
+                    <div className={classes.backward}>
+                        <Icon className={'smallIcon'} type={'NAV'} value={'BACKWARD'}/>
+                    </div>
                 </Link>
                 <div className={classes.totalStats}>
+                    <Icon className={'smallIcon'} type={'NAV'} value={'CHART_BAR'} />
                     <p>Węglowodany: {data.stats.carbs} g</p>
                     <p>Tłuszcze: {data.stats.fats} g</p>
                     <p>Białka: {data.stats.proteins} g</p>
-                    <p>Kcal: {data.stats.kcal} kcal</p>
+                    <p>&rarr; {data.stats.kcal} kcal</p>
                 </div>
             </div>
+
             <div className={classes.mealContainer}>
                 <div className={classes.mealHeader}>
+                    <Icon className={'bigIcon'} type={'MEAL'} value={data.mealType} />
                     <h3>{mealTypeMapper(data.mealType)}</h3>
                 </div>
                 <ul className={classes.foods}>
@@ -93,15 +98,31 @@ function MealContent( {...props } ) {
                                         <p>Ilość: {food.amount} {food.unit.toLowerCase()}</p>
                                     </div>
                                     <div className={classes.macros}>
-                                        <p>Węglowodany: {calculateMacro(food.macros.carbs, food.amount)}</p>
-                                        <p>Tłuszcze: {calculateMacro(food.macros.fats, food.amount)}</p>
-                                        <p>Białka: {calculateMacro(food.macros.proteins, food.amount)}</p>
-                                        <p>Kcal: {calculateMacro(food.macros.kcal, food.amount)}</p>
+                                        <div className={classes.macro}>
+                                            <p>Węglowodany</p>
+                                            <p>{calculateMacro(food.macros.carbs, food.amount)} g</p>
+                                        </div>
+                                        <div className={classes.macro}>
+                                            <p>Tłuszcze</p>
+                                            <p>{calculateMacro(food.macros.fats, food.amount)} g</p>
+                                        </div>
+                                        <div className={classes.macro}>
+                                            <p>Białka</p>
+                                            <p>{calculateMacro(food.macros.proteins, food.amount)} g</p>
+                                        </div>
+                                        <div className={classes.macro}>
+                                            <p>Kcal</p>
+                                            <p>{calculateMacro(food.macros.kcal, food.amount)}</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <p>Kategoria</p>
-                                    <p className={classes.icon}>{categoryMapper(food.category)} <Icon type={'CATEGORY'} value={food.category} /></p>
+                                <div className={classes.categoryBox}>
+                                    <p className={classes.categoryHeading}>Kategoria</p>
+                                    <div className={classes.categoryIcon}>
+                                        <p className={classes.icon}>{categoryMapper(food.category)}</p>
+                                        <Icon className={'smallIcon'} type={'CATEGORY'} value={food.category}/>
+                                    </div>
+
                                 </div>
                             </div>
                             <div className={classes.foodActions}>

@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import Icon from "../../general/ImportIcons.jsx";
 
 function MealGeneral({ data, monday, meal }) {
-    console.log(data);
     return (
         <div className={`${classes[meal]} ${classes.meal}`}>
             <div className={classes.dishType}>

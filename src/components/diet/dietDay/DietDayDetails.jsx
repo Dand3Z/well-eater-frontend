@@ -10,7 +10,6 @@ function getMealData(data, mealType) {
 function DietDayDetails( {...props } ) {
     const mondayDate = props.mondayDate;
     const data = props.data;
-    console.log(data);
     return (
         <>
             <div className={classes.dayHeader}>
