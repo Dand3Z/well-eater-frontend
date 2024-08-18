@@ -21,20 +21,20 @@ function EditFoodForm({ food, onSubmit, onCancel }) {
                     <label>Ilość w {unitMapperForDescription(food.unit)}</label>
                     <input value={amount} onChange={(e) => setAmount(e.target.value)} required/>
                 </div>
-                <div className={classes.stats}>
+                <div className={`${classes.stats} ${classes.dynamicStats}`}>
                     <p className={classes.formLabel}>Wartości dla zadanej ilości</p>
                     <div className={classes.statsValues}>
                         <div>
                             <p>Węglowodany</p>
-                            <p>{calculateMacro(food.macros.carbs, amount)}</p>
+                            <p>{calculateMacro(food.macros.carbs, amount)} g</p>
                         </div>
                         <div>
                             <p>Tłuszcze</p>
-                            <p>{calculateMacro(food.macros.fats, amount)}</p>
+                            <p>{calculateMacro(food.macros.fats, amount)} g</p>
                         </div>
                         <div>
                             <p>Białka</p>
-                            <p>{calculateMacro(food.macros.proteins, amount)}</p>
+                            <p>{calculateMacro(food.macros.proteins, amount)} g</p>
                         </div>
                         <div>
                             <p>Kcal</p>
@@ -42,20 +42,20 @@ function EditFoodForm({ food, onSubmit, onCancel }) {
                         </div>
                     </div>
                 </div>
-                <div className={classes.stats}>
+                <div className={`${classes.stats} ${classes.staticStats}`}>
                     <p className={classes.formLabel}>Wartości referencyjne dla 100 {food.unit.toLowerCase()}</p>
                     <div className={classes.statsValues}>
                         <div>
                             <p>Węglowodany</p>
-                            <p>{food.macros.carbs}</p>
+                            <p>{food.macros.carbs} g</p>
                         </div>
                         <div>
                             <p>Tłuszcze</p>
-                            <p>{food.macros.fats}</p>
+                            <p>{food.macros.fats} g</p>
                         </div>
                         <div>
                             <p>Białka</p>
-                            <p>{food.macros.proteins}</p>
+                            <p>{food.macros.proteins} g</p>
                         </div>
                         <div>
                             <p>Kcal</p>
@@ -63,8 +63,8 @@ function EditFoodForm({ food, onSubmit, onCancel }) {
                         </div>
                     </div>
                 </div>
-                <button className={classes.actionBtn} type={"submit"}>Zapisz</button>
-                <button className={classes.actionBtn} type={"button"} onClick={onCancel}>Anuluj</button>
+                <button className={`${classes.actionBtn} ${classes.saveBtn}`} type={"submit"}>Zapisz</button>
+                <button className={`${classes.actionBtn} ${classes.cancelBtn}`} type={"button"} onClick={onCancel}>Anuluj</button>
             </Form>
         </div>
     )

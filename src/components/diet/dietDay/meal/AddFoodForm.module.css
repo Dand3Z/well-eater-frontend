@@ -1,5 +1,5 @@
 .modal {
-    background: white;
+    background: #fffaf5;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -24,13 +24,61 @@
     margin-top: 10px;
     cursor: pointer;
     font: inherit;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, #e6d7c6 0px 0px 0px 1px;
+    border-radius: 0.25rem;
+}
+
+.saveBtn {
+    background-color: #ffd8a8;
+}
+
+.saveBtn:hover {
+    background-color: #ffc078;
+}
+
+.cancelBtn {
+    background-color: inherit;
+}
+
+.cancelBtn:hover {
+    background-color: #fff4e6;
+}
+
+.pageBtns {
+    display: flex;
+}
+
+.pageBtn {
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    background-color: #f0be39;
+    border-radius: 0.5rem;
+}
+
+.pageBtn:hover,
+.pageBtn:active {
+    background-color: #ffd43b;
+    transition: all 0.5s;
+}
+
+.prevPageBtn {
+    margin-right: auto;
+}
+
+.nextPageBtn {
+    margin-left: auto;
 }
 
 .form input[type="text"], .form input[type="number"] {
     padding: 8px;
     margin-bottom: 10px;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid #f0be39;
+
 }
 
 .searchResults {
@@ -38,7 +86,8 @@
     padding: 0;
     margin: 0;
     background: white;
-    border: 1px solid #ccc;
+    border: 1px solid #f0be39;
+    border-radius: 0.5rem;
     max-height: 200px;
     overflow-y: auto;
 }
@@ -49,11 +98,10 @@
 }
 
 .searchResults li:hover {
-    background: #eee;
+    background: #fff4e6;
 }
 
 .selectedFood {
-    margin-bottom: 10px;
     font-weight: bold;
 }
 
@@ -61,6 +109,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 1.4rem;
+    padding-bottom: 1.1rem;
 }
 
 .stats p {
@@ -70,12 +119,27 @@
 .statsValues {
     display: flex;
     justify-content: space-between;
+    padding: 0.3rem;
+}
+
+.statsValues div {
+    flex: 1;
 }
 
 .statsValues div p {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.dynamicStats {
+    border: 0.2rem dotted #ffa94d;
+    border-radius: 1rem;
+}
+
+.staticStats {
+    border-radius: 1rem;
+    border: 0.2rem dotted rgba(153, 143, 132, 0.34);
 }
 
 .formLabel {
