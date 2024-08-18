@@ -30,12 +30,19 @@
 .productHeader {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     font-size: 1.3rem;
+    text-align: center;
+    overflow: hidden;
 }
 
 .productHeader p{
     margin: 0;
+    display: inline;
+    flex-shrink: 1;
+    flex-basis: 0;
+    width: 12rem;
 }
 
 .productDescription {
