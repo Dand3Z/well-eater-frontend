@@ -20,6 +20,7 @@ function DietDayDetails( {...props } ) {
                 </Link>
                 <div className={classes.totalStats}>
                     <Icon className={'smallIcon'} type={'NAV'} value={'CHART_BAR'} />
+                    <p>Statystyki dnia:</p>
                     <p>Węglowodany: {data.stats.stats.carbs} g</p>
                     <p>Tłuszcze: {data.stats.stats.fats} g</p>
                     <p>Białka: {data.stats.stats.proteins} g</p>

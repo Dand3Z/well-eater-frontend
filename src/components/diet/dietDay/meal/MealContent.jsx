@@ -75,7 +75,8 @@ function MealContent( {...props } ) {
                     </div>
                 </Link>
                 <div className={classes.totalStats}>
-                    <Icon className={'smallIcon'} type={'NAV'} value={'CHART_BAR'} />
+                    <Icon className={'smallIcon'} type={'NAV'} value={'CHART_BAR'}/>
+                    <p>Statystyki dania:</p>
                     <p>Węglowodany: {data.stats.carbs} g</p>
                     <p>Tłuszcze: {data.stats.fats} g</p>
                     <p>Białka: {data.stats.proteins} g</p>

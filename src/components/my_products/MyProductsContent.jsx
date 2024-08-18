@@ -62,16 +62,16 @@ function MyProductsContent({ initData, loadPageFunc }) {
                             </p>
                             <div className={classes.kcal}>{product.macros.kcal}</div>
                             <div className={classes.stats}>
-                                <div>
-                                    <p>Węglowodany</p>
+                                <div className={classes.carbs}>
+                                    <p>Węgl.</p>
                                     <p>{product.macros.carbs}</p>
                                 </div>
-                                <div>
-                                    <p>Tłuszcze</p>
+                                <div className={classes.fats}>
+                                    <p>Tłu.</p>
                                     <p>{product.macros.fats}</p>
                                 </div>
-                                <div>
-                                    <p>Białka</p>
+                                <div className={classes.proteins}>
+                                    <p>Biał</p>
                                     <p>{product.macros.proteins}</p>
                                 </div>
                             </div>
