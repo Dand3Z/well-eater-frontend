@@ -52,7 +52,7 @@ function MyProductsContent({ initData, loadPageFunc }) {
                     <li className={`${classes.listItem} ${classes.productItem}`} key={product.id}>
                         <div className={classes.productHeader}>
                             <p>{product.name}</p>
-                            <Icon className={'smallIcon'} type={'CATEGORY'} value={product.category}/>
+                            {product.category !== 'OTHER' && <Icon className={'smallIcon'} type={'CATEGORY'} value={product.category}/>}
                         </div>
                         <div className={classes.macros}>
                             <p className={classes.productDescription}>
