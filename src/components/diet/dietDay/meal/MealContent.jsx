@@ -121,7 +121,7 @@ function MealContent( {...props } ) {
                                     <p className={classes.categoryHeading}>Kategoria</p>
                                     <div className={classes.categoryIcon}>
                                         <p className={classes.icon}>{categoryMapper(food.category)}</p>
-                                        <Icon className={'smallIcon'} type={'CATEGORY'} value={food.category}/>
+                                        {food.category !== 'OTHER' && <Icon className={'smallIcon'} type={'CATEGORY'} value={food.category}/>}
                                     </div>
 
                                 </div>

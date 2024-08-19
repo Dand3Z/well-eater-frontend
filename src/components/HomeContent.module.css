@@ -1,3 +1,28 @@
 .content{
+    padding-bottom: 3rem;
+}
 
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list li {
+    padding-bottom: 2.5rem;
+}
+
+.list li:last-child {
+    padding-bottom: 1rem;
+}
+
+.image {
+    width: 80%;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

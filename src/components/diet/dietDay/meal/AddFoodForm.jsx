@@ -100,6 +100,7 @@ function AddFoodForm({ mealId, onSubmit, onCancel }) {
                         <div className={classes.selectedFood}>
                             <p>Wybrano: {selectedFood.name}</p>
                         </div>
+                        <label>Ilość w {unitMapperForDescription(selectedFood.unit)}</label>
                         <input
                             type="number"
                             value={amount}

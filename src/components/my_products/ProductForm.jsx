@@ -2,7 +2,12 @@ import classes from './ProductForm.module.css';
 import {getAuthToken} from "../../util/auth.js";
 import {Form, json} from "react-router-dom";
 import {useState} from "react";
-import {categoryMapper, typeMapper, unitMapperForProductForm} from "../../util/nameMappers.js";
+import {
+    categoryMapper,
+    typeMapper,
+    unitMapperForDescription,
+    unitMapperForProductForm
+} from "../../util/nameMappers.js";
 
 function ProductForm({ product, onCancel, action }) {
     const [name, setName] = useState(product ? product.name : '');
@@ -110,11 +115,13 @@ function ProductForm({ product, onCancel, action }) {
                         isValidName(e.target.value);
                         validateForm();
                     }} required/>
-                    {!validations.name.hiddenMessage && !validations.name.isValid && (<span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
+                    {!validations.name.hiddenMessage && !validations.name.isValid && (
+                        <span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
                 </div>
                 <div className={classes.formGroup}>
                     <label>Kategoria</label>
-                    <select className={classes.formSelect} value={category} onChange={(e) => setCategory(e.target.value)} required>
+                    <select className={classes.formSelect} value={category}
+                            onChange={(e) => setCategory(e.target.value)} required>
                         {categories.map(category => (
                             <option key={category} value={category}>{categoryMapper(category)}</option>
                         ))}
@@ -122,7 +129,8 @@ function ProductForm({ product, onCancel, action }) {
                 </div>
                 <div className={classes.formGroup}>
                     <label>Typ</label>
-                    <select className={classes.formSelect} value={type} onChange={(e) => setType(e.target.value)} required>
+                    <select className={classes.formSelect} value={type} onChange={(e) => setType(e.target.value)}
+                            required>
                         {types.map(type => (
                             <option key={type} value={type}>{typeMapper(type)}</option>
                         ))}
@@ -130,12 +138,14 @@ function ProductForm({ product, onCancel, action }) {
                 </div>
                 <div className={classes.formGroup}>
                     <label>Jednostka</label>
-                    <select className={classes.formSelect} value={unit} onChange={(e) => setUnit(e.target.value)} required>
+                    <select className={classes.formSelect} value={unit} onChange={(e) => setUnit(e.target.value)}
+                            required>
                         {units.map(unit => (
                             <option key={unit} value={unit}>{unitMapperForProductForm(unit)}</option>
                         ))}
                     </select>
                 </div>
+                <h6 className={classes.description}>Wartości kaloryczne w 100 {unitMapperForDescription(unit)}:</h6>
                 <div className={classes.formGroup}>
                     <label>Węglowodany</label>
                     <input className={classes.formInput} value={carbs} onChange={(e) => {
@@ -143,7 +153,8 @@ function ProductForm({ product, onCancel, action }) {
                         isValidMacroValue('carbs', e.target.value);
                         validateForm();
                     }} required/>
-                    {!validations.carbs.hiddenMessage && !validations.carbs.isValid && (<span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
+                    {!validations.carbs.hiddenMessage && !validations.carbs.isValid && (
+                        <span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
                 </div>
                 <div className={classes.formGroup}>
                     <label>Tłuszcze</label>
@@ -152,7 +163,8 @@ function ProductForm({ product, onCancel, action }) {
                         isValidMacroValue('fats', e.target.value);
                         validateForm();
                     }} required/>
-                    {!validations.fats.hiddenMessage && !validations.fats.isValid && (<span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
+                    {!validations.fats.hiddenMessage && !validations.fats.isValid && (
+                        <span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
                 </div>
                 <div className={classes.formGroup}>
                     <label>Białka</label>
@@ -161,7 +173,8 @@ function ProductForm({ product, onCancel, action }) {
                         isValidMacroValue('proteins', e.target.value);
                         validateForm();
                     }} required/>
-                    {!validations.proteins.hiddenMessage && !validations.proteins.isValid && (<span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
+                    {!validations.proteins.hiddenMessage && !validations.proteins.isValid && (
+                        <span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
                 </div>
                 <div className={classes.formGroup}>
                     <label>Kalorie</label>
@@ -170,10 +183,14 @@ function ProductForm({ product, onCancel, action }) {
                         isValidMacroValue('kcal', e.target.value);
                         validateForm();
                     }} required/>
-                    {!validations.kcal.hiddenMessage && !validations.kcal.isValid && (<span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
+                    {!validations.kcal.hiddenMessage && !validations.kcal.isValid && (
+                        <span className={classes.errorDesc}>Pole zawiera nieprawidłową wartość!</span>)}
                 </div>
-                <button className={`${classes.actionBtn} ${classes.saveBtn}`} type={"submit"} onClick={handleSubmit} disabled={!isSubmitActive}>{product ? 'Zapisz' : 'Dodaj'}</button>
-                <button className={`${classes.actionBtn} ${classes.cancelBtn}`} type={"button"} onClick={onCancel}>Anuluj</button>
+                <button className={`${classes.actionBtn} ${classes.saveBtn}`} type={"submit"} onClick={handleSubmit}
+                        disabled={!isSubmitActive}>{product ? 'Zapisz' : 'Dodaj'}</button>
+                <button className={`${classes.actionBtn} ${classes.cancelBtn}`} type={"button"}
+                        onClick={onCancel}>Anuluj
+                </button>
             </Form>
         </div>);
 }
