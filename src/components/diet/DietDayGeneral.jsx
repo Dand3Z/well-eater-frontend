@@ -18,7 +18,7 @@ function DietDayGeneral({ day, data, date }) {
                         <p>Węglowodany: {data.stats.stats.carbs} g</p>
                         <p>Tłuszcze: {data.stats.stats.fats} g</p>
                         <p>Białka: {data.stats.stats.proteins} g</p>
-                        <p>Kcal: {data.stats.stats.kcal} kcal</p>
+                        <p>Kcal: {data.stats.stats.kcal}</p>
                     </div>
                 </Link>) : (
                 <Form className={classes.form} method={"post"} action={`/diet/${currentMonday}`} onSubmit={(e) => {
