@@ -15,7 +15,6 @@
 .totalStats p {
     display: block;
 }
-/*ffefdc e6d7c6*/
 .mealContainer {
     width: 40rem;
     background-color: #fff5ea;
@@ -24,7 +23,6 @@
     padding: 1rem 1.5rem;
     display: flex;
     flex-direction: column;
-    /*align-items: center;*/
     border-radius: 1rem;
 }
 

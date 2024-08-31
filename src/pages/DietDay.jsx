@@ -18,7 +18,6 @@ function DietDayPage() {
 export default DietDayPage;
 
 export async function loader({ params }) {
-    // Check if this check is necessary :)
     const authResult = checkAuthLoader();
     if (authResult instanceof Response) {
         return authResult;

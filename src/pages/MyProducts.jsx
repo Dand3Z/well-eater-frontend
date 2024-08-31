@@ -12,7 +12,6 @@ function MyProductsPage() {
 export default MyProductsPage;
 
 export async function loader() {
-    // Check if this check is necessary :)
     const authResult = checkAuthLoader();
     if (authResult instanceof Response) {
         return authResult;

@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import {Form, json} from "react-router-dom";
 import {getAuthToken} from "../../util/auth.js";
 
-// TODO: make a component -> almost the same as the one in AddFoodForm.jsx
 function ProductsView() {
     const [searchText, setSearchText] = useState("");
     const [searchResults, setSearchResults] = useState([]);

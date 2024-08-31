@@ -55,7 +55,6 @@ function ProductForm({ product, onCancel, action }) {
     const types = ['SIMPLE_PRODUCT', 'COMPLEX_MEAL'];
     const units = ['G', 'ML'];
 
-    // TODO: change reload of page to sth that doesn't require refreshing
     const handleSubmit = async (e) => {
         e.preventDefault();
         const foodData = {
