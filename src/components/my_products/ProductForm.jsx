@@ -223,7 +223,7 @@ async function keepAndEditFood(foodData, foodId) {
     const token = getAuthToken();
 
     const response = await fetch(`http://localhost:8080/admin/food/to-delete/unmark/${foodId}`, {
-        method: 'PATCH',
+        method: 'PUT',
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
