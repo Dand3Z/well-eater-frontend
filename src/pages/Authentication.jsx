@@ -1,5 +1,6 @@
 import AuthForm from "../components/AuthForm.jsx";
 import {json, redirect} from "react-router-dom";
+import {getServerUrl} from "../util/url.js";
 
 
 function AuthenticationPage() {
@@ -24,7 +25,7 @@ export async function action({ request }) {
 
     console.log(authData);
 
-    const response = await fetch('http://localhost:8080/auth/' + action, {
+    const response = await fetch(`${getServerUrl()}/api/auth/` + action, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
