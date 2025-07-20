@@ -4,6 +4,7 @@ import {useState} from "react";
 import {getAuthToken} from "../../../../util/auth.js";
 import {calculateMacro} from "../../../../util/food.js";
 import {unitMapperForDescription} from "../../../../util/nameMappers.js";
+import {getServerUrl} from "../../../../util/url.js";
 
 function EditFoodForm({ food, onSubmit, onCancel }) {
     const [amount, setAmount] = useState(food.amount);
@@ -78,7 +79,7 @@ export async function editFoodAction(mealFoodId, newAmount) {
         amount: newAmount,
     };
 
-    const response = await fetch(`http://localhost:8080/api/meal/edit-food/${mealFoodId}`, {
+    const response = await fetch(`${getServerUrl()}/api/user/meal/edit-food/${mealFoodId}`, {
         method: 'PATCH',
         headers: {
             Authorization: `Bearer ${token}`,

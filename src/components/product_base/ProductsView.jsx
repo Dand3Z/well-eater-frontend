@@ -2,6 +2,7 @@ import classes from "./ProductsView.module.css"
 import {useEffect, useState} from "react";
 import {Form, json} from "react-router-dom";
 import {getAuthToken} from "../../util/auth.js";
+import {getServerUrl} from "../../util/url.js";
 
 function ProductsView() {
     const [searchText, setSearchText] = useState("");
@@ -119,7 +120,7 @@ function ProductsView() {
 export default ProductsView;
 
 export async function searchFoodBySubstring(substring, page, size = 10) {
-    const response = await fetch(`http://localhost:8080/api/food/search/by-text?text=${substring}&page=${page}&size=${size}`, {
+    const response = await fetch(`${getServerUrl()}/api/user/food/search/by-text?text=${substring}&page=${page}&size=${size}`, {
         method: 'GET',
     });
 

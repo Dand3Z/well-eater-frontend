@@ -2,6 +2,7 @@ import classes from './DietDayGeneral.module.css';
 import {dayWeekMapper} from '../../util/nameMappers.js';
 import {Form, json, Link, useNavigate, useOutletContext, useSubmit} from "react-router-dom";
 import {getAuthToken} from "../../util/auth.js";
+import {getServerUrl} from "../../util/url.js";
 
 // date, dietDayId, dietDay[], stats: date, stats: carbs, fats, kcal, proteins
 function DietDayGeneral({ day, data, date }) {
@@ -44,7 +45,7 @@ export async function initDietDayAction({ params, request }) {
         dietDate: formData.get("date"),
     };
 
-    const response = await fetch(`http://localhost:8080/api/diet-day/create`, {
+    const response = await fetch(`${getServerUrl()}/api/user/diet-day/create`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
