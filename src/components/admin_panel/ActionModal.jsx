@@ -1,6 +1,7 @@
 import classes from './ActionModal.module.css';
 import {Form, json} from "react-router-dom";
 import {getAuthToken} from "../../util/auth.js";
+import {getServerUrl} from "../../util/url.js";
 
 function ActionModal({ product, onCancel, action }) {
 
@@ -39,7 +40,7 @@ export default ActionModal;
 
 async function deleteFood(foodId) {
     const token = getAuthToken();
-    const response = await fetch(`http://localhost:8080/admin/food/delete/${foodId}`, {
+    const response = await fetch(`${getServerUrl()}/api/admin/food/delete/${foodId}`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${token}`,

@@ -1,6 +1,7 @@
 import MealContent from "../components/diet/dietDay/meal/MealContent.jsx";
 import {checkAuthLoader, getAuthToken} from "../util/auth.js";
 import {json, useLoaderData} from "react-router-dom";
+import {getServerUrl} from "../util/url.js";
 
 function MealPage() {
     const loaderData = useLoaderData();
@@ -21,7 +22,7 @@ export async function loader({ params }) {
     const mealId = params.mealId;
     const token = getAuthToken();
 
-    const response = await fetch(`http://localhost:8080/api/meal/get/${mealId}`, {
+    const response = await fetch(`${getServerUrl()}/api/user/meal/get/${mealId}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`,

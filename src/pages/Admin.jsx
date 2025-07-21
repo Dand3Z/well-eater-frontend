@@ -1,6 +1,7 @@
 import AdminView from "../components/admin_panel/AdminView.jsx";
 import {checkAuthLoader, checkRole, getAuthToken} from "../util/auth.js";
 import {json, redirect, useLoaderData} from "react-router-dom";
+import {getServerUrl} from "../util/url.js";
 
 function AdminPage() {
     const loaderData = useLoaderData();
@@ -23,7 +24,7 @@ export async function loader() {
 
 async function loadToDeleteProducts(page = 0, size = 9) {
     const token = getAuthToken();
-    const response = await fetch(`http://localhost:8080/admin/food/get-all-to-delete?page=${page}&size=${size}`, {
+    const response = await fetch(`${getServerUrl()}/api/admin/food/get-all-to-delete?page=${page}&size=${size}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,

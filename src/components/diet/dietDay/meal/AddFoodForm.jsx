@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {getAuthToken} from "../../../../util/auth.js";
 import {unitMapperForDescription} from "../../../../util/nameMappers.js";
 import {calculateMacro} from "../../../../util/food.js";
+import {getServerUrl} from "../../../../util/url.js";
 
 function AddFoodForm({ mealId, onSubmit, onCancel }) {
     const [amount, setAmount] = useState(0);
@@ -168,7 +169,7 @@ export async function addFoodAction(mealId, foodId, amount) {
         amount: amount,
     };
 
-    const response = await fetch(`http://localhost:8080/api/meal/add-food`, {
+    const response = await fetch(`${getServerUrl()}/api/user/meal/add-food`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -189,7 +190,7 @@ export async function addFoodAction(mealId, foodId, amount) {
 
 async function searchFoodBySubstring(substring, page, size = 10) {
     const token = getAuthToken();
-    const response = await fetch(`http://localhost:8080/api/food/search/by-text?text=${substring}&page=${page}&size=${size}`, {
+    const response = await fetch(`${getServerUrl()}/api/user/food/search/by-text?text=${substring}&page=${page}&size=${size}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,

@@ -1,6 +1,7 @@
 import classes from './DeleteFoodForm.module.css';
 import {getAuthToken} from "../../../../util/auth.js";
 import {Form, json} from "react-router-dom";
+import {getServerUrl} from "../../../../util/url.js";
 
 function DeleteFoodForm({ food, onSubmit, onCancel }) {
 
@@ -25,7 +26,7 @@ export default DeleteFoodForm;
 export async function deleteFoodAction(mealFoodId) {
     const token = getAuthToken();
 
-    const response = await fetch(`http://localhost:8080/api/meal/delete-food/${mealFoodId}`, {
+    const response = await fetch(`${getServerUrl()}/api/user/meal/delete-food/${mealFoodId}`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${token}`,

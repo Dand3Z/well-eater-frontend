@@ -3,6 +3,7 @@ import {useState} from "react";
 import {json, Outlet, useLoaderData, useMatch, useNavigate} from "react-router-dom";
 import {checkAuthLoader, getAuthToken} from "../util/auth.js";
 import DietNavMenu from "../components/diet/DietNavMenu.jsx";
+import {getServerUrl} from "../util/url.js";
 
 
 
@@ -45,7 +46,7 @@ export async function loadDiet({ params }) {
   const currentSunday = calculateCurrentSunday(currentMonday);
   const token = getAuthToken();
 
-  const response = await fetch(`http://localhost:8080/api/diet-day/get/by-date?startDate=${currentMonday}&endDate=${currentSunday}`, {
+  const response = await fetch(`${getServerUrl()}/api/user/diet-day/get/by-date?startDate=${currentMonday}&endDate=${currentSunday}`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,

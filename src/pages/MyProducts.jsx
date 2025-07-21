@@ -1,6 +1,7 @@
 import {checkAuthLoader, getAuthToken} from "../util/auth.js";
 import {json, useLoaderData} from "react-router-dom";
 import MyProductsContent from "../components/my_products/MyProductsContent.jsx";
+import {getServerUrl} from "../util/url.js";
 
 function MyProductsPage() {
     const loaderData = useLoaderData();
@@ -21,7 +22,7 @@ export async function loader() {
 
 async function loadMyProducts(page = 0, size = 14) {
     const token = getAuthToken();
-    const response = await fetch(`http://localhost:8080/api/food/search/created-by-me?page=${page}&size=${size}`, {
+    const response = await fetch(`${getServerUrl()}/api/user/food/search/created-by-me?page=${page}&size=${size}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,

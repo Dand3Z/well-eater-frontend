@@ -1,6 +1,7 @@
 import {checkAuthLoader, getAuthToken} from "../util/auth.js";
 import {json, Outlet, useLoaderData, useMatch} from "react-router-dom";
 import DietDayDetails from "../components/diet/dietDay/DietDayDetails.jsx";
+import {getServerUrl} from "../util/url.js";
 
 function DietDayPage() {
     const loaderData = useLoaderData();
@@ -27,7 +28,7 @@ export async function loader({ params }) {
     const dayId = params.dietDayId;
     const token = getAuthToken();
 
-    const response = await fetch(`http://localhost:8080/api/diet-day/get/${dayId}`, {
+    const response = await fetch(`${getServerUrl()}/api/user/diet-day/get/${dayId}`, {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`,

@@ -8,6 +8,7 @@ import {
     unitMapperForDescription,
     unitMapperForProductForm
 } from "../../util/nameMappers.js";
+import {getServerUrl} from "../../util/url.js";
 
 function ProductForm({ product, onCancel, action }) {
     const [name, setName] = useState(product ? product.name : '');
@@ -200,7 +201,7 @@ async function addEditFood(foodData, foodId = undefined) {
     const token = getAuthToken();
     const requestPath = foodId ? `update/${foodId}` : "create";
 
-    const response = await fetch(`http://localhost:8080/api/food/${requestPath}`, {
+    const response = await fetch(`${getServerUrl()}/api/user/food/${requestPath}`, {
         method: foodId ? "PUT" : "POST",
         headers: {
             Authorization: `Bearer ${token}`,
@@ -222,7 +223,7 @@ async function addEditFood(foodData, foodId = undefined) {
 async function keepAndEditFood(foodData, foodId) {
     const token = getAuthToken();
 
-    const response = await fetch(`http://localhost:8080/admin/food/to-delete/unmark/${foodId}`, {
+    const response = await fetch(`${getServerUrl()}/api/admin/food/to-delete/unmark/${foodId}`, {
         method: 'PUT',
         headers: {
             Authorization: `Bearer ${token}`,
