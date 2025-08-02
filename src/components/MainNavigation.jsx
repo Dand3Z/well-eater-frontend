@@ -11,11 +11,13 @@ function MainNavigation() {
             <nav>
                 <ul className={classes.list}>
                     <li>
-                        <NavLink
-                            to="/"
-                            className={({isActive}) => isActive ? classes.active : undefined} end>
-                            Strona Główna
-                        </NavLink>
+                        {!token && (
+                            <NavLink
+                                to="/"
+                                className={({isActive}) => isActive ? classes.active : undefined} end>
+                                Strona Główna
+                            </NavLink>
+                        )}
                     </li>
                     <li>
                         <NavLink to={"/products"}
