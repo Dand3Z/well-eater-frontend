@@ -1,7 +1,6 @@
 import AuthForm from "../components/AuthForm.jsx";
 import {json, redirect} from "react-router-dom";
 import {getServerUrl} from "../util/url.js";
-import {calculateCurrentMonday} from "../util/date.js";
 
 
 function AuthenticationPage() {
@@ -52,5 +51,5 @@ export async function action({ request }) {
         expiration.setHours(expiration.getHours() + 12);
         localStorage.setItem('expiration', expiration.toISOString());
     }
-    return redirect(`/diet/${calculateCurrentMonday()}`);
+    return redirect(`/diet`);
 }
