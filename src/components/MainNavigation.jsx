@@ -1,10 +1,11 @@
 import classes from "./MainNavigation.module.css";
-import {Form, NavLink} from "react-router-dom";
-import {calculateCurrentMonday} from "../util/date.js";
+import {Form, NavLink, useMatch} from "react-router-dom";
 import {checkRole} from "../util/auth.js";
 
 function MainNavigation() {
     const token = localStorage.getItem("token");
+    const dietMatch = useMatch('/diet/:date?');
+    const dietRootMatch = useMatch('/diet');
 
     return (
         <header className={classes.header}>
@@ -27,8 +28,8 @@ function MainNavigation() {
                     </li>
                     {token && (
                         <li>
-                            <NavLink to={`/diet/${calculateCurrentMonday()}`}
-                                     className={({isActive}) => isActive ? classes.active : undefined}>
+                            <NavLink to={`/diet`}
+                                     className={() => dietMatch || dietRootMatch ? classes.active : undefined}>
                                 Moja Dieta
                             </NavLink>
                         </li>
