@@ -7,7 +7,7 @@ import AuthenticationPage, {
   action as authAction,
 } from "./pages/Authentication.jsx";
 import { action as logoutAction } from "./pages/Logout.jsx";
-import { checkAuthLoader, tokenLoader } from "./util/auth.js";
+import { tokenLoader } from "./util/auth.js";
 import { loader as dietDayLoader } from "./pages/DietDay.jsx";
 import { loader as mealLoader} from "./pages/Meal.jsx";
 import { loader as myProductsLoader } from "./pages/MyProducts.jsx";
@@ -19,11 +19,13 @@ import {initDietDayAction} from "./components/diet/DietDayGeneral.jsx";
 import MyProductsPage from "./pages/MyProducts.jsx";
 import ProductBase from "./pages/ProductBase.jsx";
 import AdminPage from "./pages/Admin.jsx";
+import Error from "./pages/Error.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <Error />,
     id: "root",
     loader: tokenLoader,
     children: [

@@ -3,6 +3,7 @@ import classes from "./Icon.module.css";
 const iconBasePath = "/icons/";
 const dietPath = "diet/";
 const navigationPath = "navigation/";
+const errorPath = "error/";
 
 const categoryIcons = {
   VEGETABLE: "vegetable.svg",
@@ -60,6 +61,10 @@ const navIcons = {
   LOGOUT: "logout.svg",
 };
 
+const errorIcons = {
+  BUG_CAT_CAPOO: "bug_cat_capoo.gif",
+}
+
 const iconsSelector = {
   CATEGORY: {
     icons: categoryIcons,
@@ -81,6 +86,10 @@ const iconsSelector = {
     icons: navIcons,
     path: `${iconBasePath + navigationPath}`,
   },
+  ERROR: {
+    icons: errorIcons,
+    path: `${iconBasePath + errorPath}`,
+  }
 };
 
 const Icon = ({ type, value, className }) => {
