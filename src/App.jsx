@@ -47,6 +47,7 @@ const router = createBrowserRouter([
         element: <DietWeekPage />,
         loader: loadDiet,
         action: initDietDayAction,
+        shouldRevalidate: () => true,
         children: [
           {
             index: true,
@@ -56,6 +57,7 @@ const router = createBrowserRouter([
             path: "day/:dietDayId",
             element: <DietDayPage />,
             loader: dietDayLoader,
+            shouldRevalidate: () => true,
             children: [
               {
                 index: true,
