@@ -12,9 +12,13 @@ function DietDaysSummary({dietDays}) {
         kcal: calculateMean(dietDays.map(day => day.stats.stats.kcal)),
     };
 
+    const areAllMeanDataZero = (mean) => {
+        return mean.carbs === 0 && mean.fats === 0 && mean.proteins === 0 && mean.proteins === 0;
+    }
+
     return (
         <>
-            {daysAmount !== 0 &&
+            {daysAmount !== 0 && !areAllMeanDataZero(mean) &&
                 <div className={classes.summaryContainer}>
                     <div className={classes.summaryHeader}>
                         <Icon className={'smallIcon'} type={'NAV'} value={'CHART_BAR_SQUARE'}/>

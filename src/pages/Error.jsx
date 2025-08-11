@@ -12,11 +12,6 @@ function Error() {
         message = error.data.message;
     }
 
-    if (error.status === 404) {
-        title = 'Nie znaleziono';
-        message = 'Nie udało się znaleźć zasoby bądź strony';
-    }
-
     return (
         <>
             <MainNavigation />
